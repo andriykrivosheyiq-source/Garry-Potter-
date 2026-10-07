@@ -50,6 +50,7 @@
       // Чорне й сіре худі — інша модель (oversize), рукав розташований інакше.
       over: { black: 1, gray: 1 },
       overPlaces: { sleeve: { x: 18, y: 50, w: 6, rot: -6 } },
+      overPlacesByColor: { gray: { sleeve: { x: 15.5, y: 50, w: 6, rot: -6 } } },
       img: function (c, side) {
         var over = c === 'black' || c === 'gray';
         return 'images/' + (over ? 'hoodieover-' : 'hoodie-') + c + '-' + side + '.webp';
@@ -199,7 +200,11 @@
 
   function placeOf(s) {
     var p = PRODUCTS[s.product];
-    return (p.over && p.over[s.color] && p.overPlaces[s.place]) || p.places[s.place];
+    if (p.over && p.over[s.color]) {
+      var byColor = p.overPlacesByColor && p.overPlacesByColor[s.color];
+      return (byColor && byColor[s.place]) || p.overPlaces[s.place] || p.places[s.place];
+    }
+    return p.places[s.place];
   }
 
   /* Вставляє виріб + дизайн у контейнер .garment */
@@ -241,20 +246,24 @@
     }).join('');
   }
 
-  function hexRGB(h) { return [1, 3, 5].map(function (i) { return parseInt(h.substr(i, 2), 16); }); }
-  function nearestColor(product, hex) {
-    var a = hexRGB(hex), best = null, bd = Infinity, cs = PRODUCTS[product].colors;
-    Object.keys(cs).forEach(function (k) {
-      var b = hexRGB(cs[k][1]);
-      var d = Math.pow(a[0] - b[0], 2) + Math.pow(a[1] - b[1], 2) + Math.pow(a[2] - b[2], 2);
-      if (d < bd) { bd = d; best = k; }
-    });
-    return best;
+  // Відповідність кольорів між виробами: один «тон» — один колір у кожному виробі.
+  var TONES = {
+    white: { tee: 'white', sweat: 'white', hoodie: 'white' },
+    gray: { tee: 'lgray', sweat: 'gray', hoodie: 'gray' },
+    black: { tee: 'black', sweat: 'black', hoodie: 'black' },
+    bordo: { tee: 'wine', sweat: 'bordo', hoodie: 'bordo' },
+    green: { tee: 'green', sweat: 'darkgreen', hoodie: 'darkgreen' },
+    blue: { tee: 'navy', sweat: 'navy', hoodie: 'royalblue' },
+    yellow: { tee: 'yellow', sweat: 'yellow', hoodie: 'sunyellow' }
+  };
+  function sameTone(fromProduct, color, toProduct) {
+    for (var t in TONES) if (TONES[t][fromProduct] === color) return TONES[t][toProduct];
+    return Object.keys(PRODUCTS[toProduct].colors)[0];
   }
 
   function personalizationError(s) {
-    if (s.type === 'crest' && !(s.initials || '').trim()) return { field: 'f-initials', msg: 'Впишіть ініціали — хоча б одну літеру.' };
-    if (s.type === 'text' && !String(s.text || '').trim()) return { field: 'f-text', msg: 'Впишіть текст напису.' };
+    if (s.type === 'crest' && !(s.initials || '').trim()) return { field: 'f-initials', box: 'initials-error', msg: 'Впишіть ініціали — хоча б одну літеру.' };
+    if (s.type === 'text' && !String(s.text || '').trim()) return { field: 'f-text', box: 'text-error', msg: 'Впишіть текст напису.' };
     return null;
   }
 
@@ -308,13 +317,18 @@
     $('#price-sticky').textContent = price;
     $('#summary').textContent = PRODUCTS[state.product].name + ' · ' + PRODUCTS[state.product].colors[state.color][0].toLowerCase() + ' · ' + describe(state);
     var err = personalizationError(state);
-    var msg = $('#personal-error');
-    if (msg && !err) { msg.hidden = true; $$('#f-initials, #f-text').forEach(function (x) { x.removeAttribute('aria-invalid'); }); }
+    if (!err) {
+      $$('#initials-error, #text-error, #personal-error').forEach(function (x) { x.hidden = true; });
+      $$('#f-initials, #f-text').forEach(function (x) { x.removeAttribute('aria-invalid'); });
+    }
     var tooLong = state.type === 'text' && (state.place === 'chest' || state.place === 'sleeve') &&
       Math.max.apply(null, String(state.text || '').split('\n').map(function (l) { return l.trim().length; })) > 14;
     $('#text-long').hidden = !tooLong;
     var mini = $('#sticky-preview');
-    if (mini) renderGarment(mini, state, { side: previewSide });
+    if (mini) {
+      mini.style.background = PRODUCTS[state.product].colors[state.color][1];
+      mini.innerHTML = designSVG(state);
+    }
   }
 
   function setState(patch, scroll) {
@@ -340,7 +354,7 @@
       }
       if (t.name === 'product') {
         var house = HOUSES[state.house];
-        patch.color = (state.type === 'crest' && house) ? house.garment[t.value] : nearestColor(t.value, PRODUCTS[state.product].colors[state.color][1]);
+        patch.color = (state.type === 'crest' && house) ? house.garment[t.value] : sameTone(state.product, state.color, t.value);
       }
       setState(patch);
     });
@@ -356,11 +370,14 @@
       e.preventDefault();
       var err = personalizationError(state);
       if (err) {
-        var m = $('#personal-error');
-        m.textContent = err.msg; m.hidden = false;
+        var box = $('#' + err.box);
+        box.textContent = err.msg; box.hidden = false;
+        var pm = $('#personal-error');
+        pm.textContent = 'Заповніть персоналізацію: ' + err.msg.charAt(0).toLowerCase() + err.msg.slice(1); pm.hidden = false;
         var f = $('#' + err.field);
         f.setAttribute('aria-invalid', 'true');
-        f.focus();
+        f.scrollIntoView({ block: 'center' });
+        f.focus({ preventScroll: true });
         return;
       }
       addToCart(assign({}, state));
@@ -555,6 +572,7 @@
         var fld = x.closest('.field'), err = fld.querySelector('.field__err');
         var v = x.value.trim(), msg = '';
         if (!v) msg = err.getAttribute('data-empty');
+        else if (x.name === 'phone' && /[^\d\s()+\-]/.test(v)) msg = 'У номері можуть бути лише цифри, пробіли, «+», дужки й дефіс.';
         else if (x.name === 'phone' && v.replace(/\D/g, '').length < 10) msg = 'Номер закороткий — вкажіть 10 цифр, напр. 050 123 45 67.';
         fld.classList.toggle('field--error', !!msg);
         err.textContent = msg;

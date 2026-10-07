@@ -156,14 +156,16 @@
             </div>
             <div class="field">
               <label class="field__label" for="f-initials">Ініціали (до 3 літер)</label>
-              <input class="input input--initials" id="f-initials" name="initials" type="text" maxlength="3" autocomplete="off" spellcheck="false" placeholder="ГП…" aria-describedby="personal-error">
+              <input class="input input--initials" id="f-initials" name="initials" type="text" maxlength="3" autocomplete="off" spellcheck="false" placeholder="ГП…" aria-describedby="initials-error">
+              <p class="field__msg" id="initials-error" role="alert" hidden></p>
             </div>
           </div>
 
           <div data-for-type="text" hidden>
             <div class="field">
               <label class="field__label" for="f-text">Текст (до 3 рядків)</label>
-              <textarea class="input" id="f-text" name="text" rows="3" maxlength="90" placeholder="напр. «Завжди»…" aria-describedby="personal-error text-long text-hint"></textarea>
+              <textarea class="input" id="f-text" name="text" rows="3" maxlength="90" placeholder="напр. «Завжди»…" aria-describedby="text-error text-long text-hint"></textarea>
+              <p class="field__msg" id="text-error" role="alert" hidden></p>
               <p class="hint" id="text-hint">Перевірте написання — виріб виготовляємо саме з цим текстом.</p>
               <p class="hint hint--warn" id="text-long" hidden>Для грудей ліворуч і рукава радимо до 14 символів у рядку — інакше літери будуть дрібні. Розбийте текст на рядки або оберіть «Груди по центру» чи «Спина».</p>
             </div>
@@ -208,7 +210,7 @@
             <p class="buy__note">Виготовлення — <span data-days>5–7</span> днів, потім відправка Новою Поштою.</p>
           </div>
           <button class="btn btn--primary btn--lg" id="add-btn" type="submit">Додати в кошик</button>
-          <p class="buy__error" id="personal-error" role="alert" hidden></p>
+          <p class="buy__error" id="personal-error" hidden></p>
           <p class="buy__summary" id="summary"></p>
         </div>
       </div>

@@ -192,6 +192,8 @@ button { font: inherit; color: inherit; }
 .buy__price { font: 700 36px/1 var(--serif-d); font-variant-numeric: lining-nums tabular-nums; }
 .buy__note { margin-top: 6px; font-size: 14px; color: var(--muted); }
 .buy__error { grid-column: 1 / -1; color: #A51D1D; font-size: 15px; font-weight: 600; }
+.field__msg { margin-top: 8px; color: #A51D1D; font-size: 14px; font-weight: 600; }
+.input[aria-invalid="true"] { border-color: #A51D1D; box-shadow: 0 0 0 1px #A51D1D; }
 .hint--warn { color: #8A4B00; }
 .buy__summary { grid-column: 1 / -1; font-size: 14px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; }
 @media (max-width: 900px) {
@@ -209,8 +211,8 @@ button { font: inherit; color: inherit; }
 /* Липка панель покупки (мобільний) */
 .sticky-buy { visibility: hidden; position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: none; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: #fff; border-top: 1px solid var(--line); box-shadow: 0 -6px 20px rgba(0, 0, 0, .06); transform: translateY(110%); transition: transform .25s; }
 .sticky-buy__preview { flex: none; width: 56px; height: 56px; padding: 2px; border: 1px solid var(--line); border-radius: 12px; background: #fff; cursor: pointer; }
-.garment--mini { display: block; height: 100%; aspect-ratio: auto; }
-.garment--mini img { width: 100%; height: 100%; object-fit: contain; }
+.garment--mini { display: grid; place-items: center; width: 100%; height: 100%; aspect-ratio: auto; border-radius: 9px; padding: 6px; }
+.garment--mini svg { width: 100%; height: 100%; }
 .sticky-buy__price { font: 700 26px/1 var(--serif-d); font-variant-numeric: lining-nums tabular-nums; }
 .sticky-buy .btn { flex: 1; max-width: 240px; }
 @media (max-width: 900px) { .sticky-buy { display: flex; } .sticky-buy.is-on { transform: none; visibility: visible; } body.in-builder .tg-fab { opacity: 0; visibility: hidden; } }
@@ -349,7 +351,7 @@ button { font: inherit; color: inherit; }
 .order-text { font-size: 13px; background: var(--bg-alt); }
 
 /* Тост */
-.toast { position: fixed; left: 50%; bottom: 24px; z-index: 70; transform: translate(-50%, 20px); opacity: 0; pointer-events: none; background: var(--ink); color: #fff; padding: 12px 18px; border-radius: 12px; font-size: 15px; transition: opacity .25s, transform .25s; max-width: calc(100% - 32px); }
+.toast { width: max-content; position: fixed; left: 50%; bottom: 24px; z-index: 70; transform: translate(-50%, 20px); opacity: 0; pointer-events: none; background: var(--ink); color: #fff; padding: 12px 18px; border-radius: 12px; font-size: 15px; transition: opacity .25s, transform .25s; max-width: calc(100% - 32px); }
 .toast { display: flex; align-items: center; gap: 14px; }
 .toast__undo { background: none; border: 0; color: var(--gold); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; min-height: 44px; padding: 0 4px; }
 .toast.is-on { pointer-events: auto; }
