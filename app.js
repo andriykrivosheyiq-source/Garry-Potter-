@@ -50,7 +50,7 @@
       // Чорне й сіре худі — інша модель (oversize), рукав розташований інакше.
       over: { black: 1, gray: 1 },
       overPlaces: { sleeve: { x: 18, y: 50, w: 6, rot: -6 } },
-      overPlacesByColor: { gray: { sleeve: { x: 15.5, y: 50, w: 6, rot: -6 } } },
+      overPlacesByColor: { gray: { sleeve: { x: 20.5, y: 50, w: 5.5, rot: -6 } } },
       img: function (c, side) {
         var over = c === 'black' || c === 'gray';
         return 'images/' + (over ? 'hoodieover-' : 'hoodie-') + c + '-' + side + '.webp';
