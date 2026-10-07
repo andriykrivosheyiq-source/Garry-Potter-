@@ -66,7 +66,7 @@ button { font: inherit; color: inherit; }
 .icon-btn:hover { border-color: var(--ink); }
 
 /* Шапка */
-.header { position: sticky; top: 0; z-index: 40; background: rgba(255, 255, 255, .92); backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--line); }
+.header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 40; background: rgba(255, 255, 255, .92); backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--line); }
 .header__in { display: flex; align-items: center; gap: 24px; height: var(--header); }
 .logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 700 24px/1 var(--serif-d); }
 .nav { display: flex; gap: 28px; margin-left: auto; }
