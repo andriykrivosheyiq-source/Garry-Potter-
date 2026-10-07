@@ -32,27 +32,30 @@
   var PRODUCTS = {
     tee: {
       name: 'Футболка', price: 690,
-      colors: { white: ['Білий', '#F1F1F3'], lgray: ['Сірий меланж', '#A7A6A9'], black: ['Чорний', '#1D1D1D'], wine: ['Бордо', '#48222B'], green: ['Темно-зелений', '#222F24'], navy: ['Темно-синій', '#171E2B'], yellow: ['Гірчичний', '#D79F29'] },
+      colors: { white: ['Білий', '#F1F1F3'], lgray: ['Сірий', '#A8A7AA'], black: ['Чорний', '#1D1D1D'], wine: ['Бордо', '#48222B'], green: ['Темно-зелений', '#263A2A'], navy: ['Темно-синій', '#1A2134'], yellow: ['Гірчичний', '#D79F29'] },
       img: function (c, side) { return 'images/tee-' + c + '-' + side + '.webp'; },
       ratio: 900 / 817,
-      places: { chest: { x: 61, y: 30, w: 13 }, center: { x: 50, y: 36, w: 30 }, back: { x: 50, y: 33, w: 36, side: 'back' }, sleeve: { x: 17, y: 30, w: 9, rot: -28 } }
+      places: { chest: { x: 61, y: 30, w: 13 }, center: { x: 50, y: 36, w: 30 }, back: { x: 50, y: 38, w: 34, side: 'back' }, sleeve: { x: 19, y: 34, w: 7, rot: -22 } }
     },
     sweat: {
       name: 'Світшот', price: 1190,
       colors: { white: ['Білий', '#EEEEEE'], gray: ['Сірий', '#CBCECD'], black: ['Чорний', '#252525'], bordo: ['Бордо', '#511C29'], darkgreen: ['Темно-зелений', '#385343'], navy: ['Темно-синій', '#25293A'], yellow: ['Жовтий', '#EDD148'] },
       img: function (c, side) { return 'images/sweat-' + c + '-' + side + '.webp'; },
       ratio: 1,
-      places: { chest: { x: 60, y: 25, w: 12 }, center: { x: 50, y: 32, w: 28 }, back: { x: 50, y: 30, w: 34, side: 'back' }, sleeve: { x: 13, y: 40, w: 7, rot: -6 } }
+      places: { chest: { x: 60, y: 25, w: 12 }, center: { x: 50, y: 32, w: 28 }, back: { x: 50, y: 30, w: 34, side: 'back' }, sleeve: { x: 19.5, y: 36, w: 6, rot: -4 } }
     },
     hoodie: {
       name: 'Худі', price: 1490,
       colors: { white: ['Білий', '#F3F3F3'], gray: ['Сірий', '#D8D1CD'], black: ['Чорний', '#2D2928'], bordo: ['Бордо', '#531D27'], darkgreen: ['Темно-зелений', '#385343'], royalblue: ['Синій', '#4F5F95'], sunyellow: ['Жовтий', '#F3D75F'] },
+      // Чорне й сіре худі — інша модель (oversize), рукав розташований інакше.
+      over: { black: 1, gray: 1 },
+      overPlaces: { sleeve: { x: 18, y: 50, w: 6, rot: -6 } },
       img: function (c, side) {
         var over = c === 'black' || c === 'gray';
         return 'images/' + (over ? 'hoodieover-' : 'hoodie-') + c + '-' + side + '.webp';
       },
       ratio: 1,
-      places: { chest: { x: 60, y: 36, w: 11 }, center: { x: 50, y: 44, w: 24 }, back: { x: 50, y: 43, w: 34, side: 'back' }, sleeve: { x: 12, y: 52, w: 6, rot: -4 } }
+      places: { chest: { x: 60, y: 36, w: 11 }, center: { x: 50, y: 44, w: 24 }, back: { x: 50, y: 43, w: 34, side: 'back' }, sleeve: { x: 22.5, y: 50, w: 5.5, rot: -3 } }
     }
   };
 
@@ -173,13 +176,17 @@
     }
   }
 
+  var MOTIF_BOX = { hallows: [14, 166], glasses: [12, 166], snitch: [66, 140], castle: [14, 184], letter: [44, 162], platform: [40, 160] };
+
   function emblemSVG(s, id) {
     var t = THREADS[s.thread] || THREADS.gold;
     var cap = (s.caption || '').trim().slice(0, 28);
-    var H = cap ? 236 : 200;
-    return '<svg viewBox="0 0 200 ' + H + '" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + esc(MOTIFS[s.motif] || 'Емблема') + '">' + defs(id, t.hex, s.tech) +
+    var box = MOTIF_BOX[s.motif] || [0, 200];
+    var top = box[0] - 4, capY = box[1] + 30;
+    var H = (cap ? capY + 10 : box[1] + 4) - top;
+    return '<svg viewBox="0 ' + top + ' 200 ' + H + '" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + esc(MOTIFS[s.motif] || 'Емблема') + '">' + defs(id, t.hex, s.tech) +
       '<g' + fx(id, s.tech) + '>' + motifPaths(s.motif, paint(id, t.hex, s.tech)) +
-      (cap ? '<text x="100" y="222" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-weight="700" font-size="' + Math.min(26, 360 / cap.length) + '" fill="' + paint(id, t.hex, s.tech) + '">' + esc(cap) + '</text>' : '') +
+      (cap ? '<text x="100" y="' + capY + '" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-weight="700" font-size="' + Math.min(26, 360 / cap.length) + '" fill="' + paint(id, t.hex, s.tech) + '">' + esc(cap) + '</text>' : '') +
       '</g></svg>';
   }
 
@@ -190,11 +197,16 @@
     return crestSVG(s, id);
   }
 
+  function placeOf(s) {
+    var p = PRODUCTS[s.product];
+    return (p.over && p.over[s.color] && p.overPlaces[s.place]) || p.places[s.place];
+  }
+
   /* Вставляє виріб + дизайн у контейнер .garment */
   function renderGarment(el, s, opts) {
     opts = opts || {};
     var p = PRODUCTS[s.product];
-    var place = p.places[s.place];
+    var place = placeOf(s);
     var side = opts.side || place.side || 'front';
     var showDesign = (place.side || 'front') === side;
     var alt = p.name + ', колір ' + p.colors[s.color][0].toLowerCase() + (side === 'back' ? ', вигляд ззаду' : '');
@@ -229,22 +241,50 @@
     }).join('');
   }
 
+  function hexRGB(h) { return [1, 3, 5].map(function (i) { return parseInt(h.substr(i, 2), 16); }); }
+  function nearestColor(product, hex) {
+    var a = hexRGB(hex), best = null, bd = Infinity, cs = PRODUCTS[product].colors;
+    Object.keys(cs).forEach(function (k) {
+      var b = hexRGB(cs[k][1]);
+      var d = Math.pow(a[0] - b[0], 2) + Math.pow(a[1] - b[1], 2) + Math.pow(a[2] - b[2], 2);
+      if (d < bd) { bd = d; best = k; }
+    });
+    return best;
+  }
+
+  function personalizationError(s) {
+    if (s.type === 'crest' && !(s.initials || '').trim()) return { field: 'f-initials', msg: 'Впишіть ініціали — хоча б одну літеру.' };
+    if (s.type === 'text' && !String(s.text || '').trim()) return { field: 'f-text', msg: 'Впишіть текст напису.' };
+    return null;
+  }
+
+  var renderedProduct = null;
+  /* Групи кнопок малюємо один раз; при змінах лише ставимо checked — так фокус клавіатури не губиться. */
+  function setChecked(name, value) {
+    $$('#builder input[name="' + name + '"]').forEach(function (i) { i.checked = i.value === value; });
+  }
+
   function syncForm() {
     var form = $('#builder');
     if (!form) return;
     var p = PRODUCTS[state.product];
     if (!p.colors[state.color]) state.color = Object.keys(p.colors)[0];
-
-    chips($('#f-product'), { tee: 'Футболка', sweat: 'Світшот', hoodie: 'Худі' }, state.product, 'product');
-    swatches($('#f-color'), p.colors, state.color, 'color', 'Колір: ');
-    chips($('#f-tech'), TECH, state.tech, 'tech');
-    chips($('#f-type'), TYPES, state.type, 'type');
-    chips($('#f-place'), PLACES, state.place, 'place');
-    chips($('#f-size'), SIZES.reduce(function (o, s) { o[s] = s; return o; }, {}), state.size, 'size');
-    chips($('#f-house'), Object.keys(HOUSES).reduce(function (o, k) { o[k] = HOUSES[k].name; return o; }, {}), state.house, 'house');
-    chips($('#f-font'), Object.keys(FONTS).reduce(function (o, k) { o[k] = FONTS[k].name; return o; }, {}), state.font, 'font');
-    chips($('#f-motif'), MOTIFS, state.motif, 'motif');
-    swatches($('#f-thread'), Object.keys(THREADS).reduce(function (o, k) { o[k] = [THREADS[k].name, THREADS[k].hex]; return o; }, {}), state.thread, 'thread', (state.tech === 'embroidery' ? 'Нитка: ' : 'Фарба: '));
+    if (!renderedProduct) {
+      chips($('#f-product'), { tee: 'Футболка', sweat: 'Світшот', hoodie: 'Худі' }, state.product, 'product');
+      chips($('#f-tech'), TECH, state.tech, 'tech');
+      chips($('#f-type'), TYPES, state.type, 'type');
+      chips($('#f-place'), PLACES, state.place, 'place');
+      chips($('#f-size'), SIZES.reduce(function (o, s) { o[s] = s; return o; }, {}), state.size, 'size');
+      chips($('#f-house'), Object.keys(HOUSES).reduce(function (o, k) { o[k] = HOUSES[k].name; return o; }, {}), state.house, 'house');
+      chips($('#f-font'), Object.keys(FONTS).reduce(function (o, k) { o[k] = FONTS[k].name; return o; }, {}), state.font, 'font');
+      chips($('#f-motif'), MOTIFS, state.motif, 'motif');
+      swatches($('#f-thread'), Object.keys(THREADS).reduce(function (o, k) { o[k] = [THREADS[k].name, THREADS[k].hex]; return o; }, {}), state.thread, 'thread', 'Колір: ');
+    }
+    if (renderedProduct !== state.product) {
+      swatches($('#f-color'), p.colors, state.color, 'color', 'Колір виробу: ');
+      renderedProduct = state.product;
+    }
+    ['product', 'tech', 'type', 'place', 'size', 'house', 'font', 'motif', 'thread', 'color'].forEach(function (n) { setChecked(n, state[n]); });
 
     $('#f-initials').value = state.initials || '';
     $('#f-text').value = state.text || '';
@@ -258,7 +298,7 @@
   }
 
   function update() {
-    var place = PRODUCTS[state.product].places[state.place];
+    var place = placeOf(state);
     var needSide = place.side || 'front';
     if (previewSide !== needSide) previewSide = needSide;
     renderGarment($('#preview'), state, { side: previewSide });
@@ -267,7 +307,14 @@
     $('#price').textContent = price;
     $('#price-sticky').textContent = price;
     $('#summary').textContent = PRODUCTS[state.product].name + ' · ' + PRODUCTS[state.product].colors[state.color][0].toLowerCase() + ' · ' + describe(state);
-    $('#add-btn').disabled = !state.size;
+    var err = personalizationError(state);
+    var msg = $('#personal-error');
+    if (msg && !err) { msg.hidden = true; $$('#f-initials, #f-text').forEach(function (x) { x.removeAttribute('aria-invalid'); }); }
+    var tooLong = state.type === 'text' && (state.place === 'chest' || state.place === 'sleeve') &&
+      Math.max.apply(null, String(state.text || '').split('\n').map(function (l) { return l.trim().length; })) > 14;
+    $('#text-long').hidden = !tooLong;
+    var mini = $('#sticky-preview');
+    if (mini) renderGarment(mini, state, { side: previewSide });
   }
 
   function setState(patch, scroll) {
@@ -293,7 +340,7 @@
       }
       if (t.name === 'product') {
         var house = HOUSES[state.house];
-        if (state.type === 'crest' && house) patch.color = house.garment[t.value];
+        patch.color = (state.type === 'crest' && house) ? house.garment[t.value] : nearestColor(t.value, PRODUCTS[state.product].colors[state.color][1]);
       }
       setState(patch);
     });
@@ -307,6 +354,15 @@
     });
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      var err = personalizationError(state);
+      if (err) {
+        var m = $('#personal-error');
+        m.textContent = err.msg; m.hidden = false;
+        var f = $('#' + err.field);
+        f.setAttribute('aria-invalid', 'true');
+        f.focus();
+        return;
+      }
       addToCart(assign({}, state));
     });
     $$('[data-side]').forEach(function (b) {
@@ -316,6 +372,8 @@
         $$('[data-side]').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
       });
     });
+    var sp = $('#sticky-preview');
+    if (sp) sp.addEventListener('click', function () { $('#constructor').scrollIntoView({ block: 'start' }); });
     $('#add-sticky').addEventListener('click', function () { form.requestSubmit ? form.requestSubmit() : form.dispatchEvent(new Event('submit', { cancelable: true })); });
   }
 
@@ -336,7 +394,7 @@
     if (!grid) return;
     grid.innerHTML = PRESETS.map(function (p) {
       var s = assign({}, DEFAULT, p.state);
-      return '<article class="design-card"><div class="garment garment--card" data-preset-preview="' + p.id + '"></div>' +
+      return '<article class="design-card"><div class="design-card__media"><div class="garment garment--card" data-preset-preview="' + p.id + '"></div></div>' +
         '<div class="design-card__body"><h3>' + esc(p.title) + '</h3><p>' + esc(p.desc) + '</p>' +
         '<div class="design-card__foot"><span class="design-card__price">від ' + money(priceOf(s)) + '</span>' +
         '<button type="button" class="btn btn--ghost btn--sm" data-preset="' + p.id + '">Персоналізувати</button></div></div></article>';
@@ -344,7 +402,7 @@
     PRESETS.forEach(function (p) {
       var s = assign({}, DEFAULT, p.state);
       var el = grid.querySelector('[data-preset-preview="' + p.id + '"]');
-      renderGarment(el, s, { side: PRODUCTS[s.product].places[s.place].side || 'front', lazy: true, width: 900 });
+      renderGarment(el, s, { side: placeOf(s).side || 'front', lazy: true, width: 900 });
     });
     grid.addEventListener('click', function (e) {
       var b = e.target.closest('[data-preset]');
@@ -388,7 +446,14 @@
   var cart = store('cn-cart') || [];
   if (!Array.isArray(cart)) cart = [];
 
-  function saveCart() { store('cn-cart', cart); renderCart(); }
+  function saveCart(focus) {
+    store('cn-cart', cart);
+    renderCart();
+    if (focus) {
+      var el = focus.key && $('#cart-list [data-key="' + focus.key + '"] ' + focus.sel);
+      (el || $(focus.fallback || '#cart-close')).focus();
+    }
+  }
 
   function addToCart(item) {
     item.qty = 1;
@@ -419,7 +484,7 @@
         '<span class="cart-item__price">' + money(i.price * i.qty) + '</span></div>' +
         '<button type="button" class="link-btn" data-remove>Видалити</button></div></li>';
     }).join('');
-    cart.forEach(function (i) { renderGarment(list.querySelector('[data-thumb="' + i.key + '"]'), i, { side: PRODUCTS[i.product].places[i.place].side || 'front', width: 900 }); });
+    cart.forEach(function (i) { renderGarment(list.querySelector('[data-thumb="' + i.key + '"]'), i, { side: placeOf(i).side || 'front', width: 900 }); });
     $('#cart-total').textContent = money(total());
     $('#checkout-total').textContent = money(total());
   }
@@ -456,13 +521,15 @@
       if (row) {
         var it = cart.filter(function (x) { return x.key === row.getAttribute('data-key'); })[0];
         if (e.target.closest('[data-qty]')) {
-          it.qty = Math.max(1, Math.min(20, it.qty + Number(e.target.closest('[data-qty]').getAttribute('data-qty'))));
-          saveCart();
+          var dq = e.target.closest('[data-qty]').getAttribute('data-qty');
+          it.qty = Math.max(1, Math.min(20, it.qty + Number(dq)));
+          saveCart({ key: it.key, sel: '[data-qty="' + dq + '"]' });
         } else if (e.target.closest('[data-remove]')) {
           var idx = cart.indexOf(it);
           cart.splice(idx, 1);
-          saveCart();
-          toast('Товар видалено з кошика', function () { cart.splice(idx, 0, it); saveCart(); });
+          var next = cart[idx] || cart[idx - 1];
+          saveCart(next ? { key: next.key, sel: '[data-remove]' } : { fallback: '#cart-empty .btn' });
+          toast('Товар видалено з кошика', function () { cart.splice(idx, 0, it); saveCart({ key: it.key, sel: '[data-remove]' }); });
         }
       }
     });
@@ -471,7 +538,7 @@
       if (d.hidden) return;
       if (e.key === 'Escape') closeCart();
       if (e.key === 'Tab') {
-        var f = $$('button, [href], input, select, textarea', d).filter(function (x) { return !x.disabled && x.offsetParent !== null; });
+        var f = $$('button, [href], input, select, textarea', d).concat($('#toast').classList.contains('is-on') ? $$('#toast-undo:not([hidden])') : []).filter(function (x) { return !x.disabled && x.offsetParent !== null; });
         if (!f.length) return;
         if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
         else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
@@ -483,18 +550,25 @@
     $('#checkout').addEventListener('submit', function (e) {
       e.preventDefault();
       var f = e.target;
-      var bad = $$('input[required]', f).filter(function (x) { return !x.checkValidity(); });
-      $$('.field', f).forEach(function (x) { x.classList.remove('field--error'); });
-      if (bad.length) {
-        bad.forEach(function (x) { x.closest('.field').classList.add('field--error'); });
-        bad[0].focus();
-        return;
-      }
+      var bad = [];
+      $$('input[required]', f).forEach(function (x) {
+        var fld = x.closest('.field'), err = fld.querySelector('.field__err');
+        var v = x.value.trim(), msg = '';
+        if (!v) msg = err.getAttribute('data-empty');
+        else if (x.name === 'phone' && v.replace(/\D/g, '').length < 10) msg = 'Номер закороткий — вкажіть 10 цифр, напр. 050 123 45 67.';
+        fld.classList.toggle('field--error', !!msg);
+        err.textContent = msg;
+        if (msg) { x.setAttribute('aria-invalid', 'true'); bad.push(x); } else x.removeAttribute('aria-invalid');
+      });
+      if (bad.length) { bad[0].focus(); return; }
       var msg = orderText(f);
       $('#order-text').value = msg;
       $('#tg-link').href = 'https://t.me/' + CONFIG.telegram;
       showStep('done');
-      copy(msg, true);
+      $('#done-copy').textContent = 'Відкрийте Telegram, вставте текст замовлення й надішліть менеджеру — він підтвердить замовлення й уточнить деталі. Після підтвердження почнемо виготовлення.';
+      copy(msg, true, function (ok) {
+        $('#done-copy').textContent = (ok ? 'Ми скопіювали деталі замовлення. ' : 'Скопіюйте текст замовлення нижче. ') + $('#done-copy').textContent;
+      });
       $('#cart-title').focus();
     });
     $('#copy-order').addEventListener('click', function () { copy($('#order-text').value); });
@@ -519,13 +593,21 @@
     return lines.join('\n');
   }
 
-  function copy(text, silent) {
-    var done = function () { if (!silent) toast('Текст замовлення скопійовано'); };
+  function copy(text, silent, cb) {
+    var result = function (ok) {
+      if (!silent) toast(ok ? 'Текст замовлення скопійовано' : 'Не вдалося скопіювати — виділіть текст і скопіюйте вручну');
+      if (cb) cb(ok);
+    };
+    var fallback = function () {
+      var ta = $('#order-text'); ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      result(ok);
+    };
     try {
-      if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done, function () {}); return; }
-    } catch (e) { /* ignore */ }
-    var ta = $('#order-text'); ta.select();
-    try { document.execCommand('copy'); done(); } catch (e) { /* ignore */ }
+      if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(function () { result(true); }, fallback); return; }
+    } catch (e) { /* fallthrough */ }
+    fallback();
   }
 
   var toastTimer;
@@ -542,24 +624,55 @@
   /* ---------- Мобільне меню й липка панель ---------- */
   function bindNav() {
     var btn = $('#menu-btn'), nav = $('#nav');
-    btn.addEventListener('click', function () {
-      var open = btn.getAttribute('aria-expanded') !== 'true';
+    function setMenu(open) {
       btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'Закрити меню' : 'Меню');
       nav.classList.toggle('is-open', open);
+    }
+    btn.addEventListener('click', function () { setMenu(btn.getAttribute('aria-expanded') !== 'true'); });
+    nav.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.classList.contains('is-open')) { setMenu(false); btn.focus(); }
     });
-    nav.addEventListener('click', function (e) {
-      if (e.target.closest('a')) { btn.setAttribute('aria-expanded', 'false'); nav.classList.remove('is-open'); }
+    document.addEventListener('click', function (e) {
+      if (nav.classList.contains('is-open') && !e.target.closest('#nav, #menu-btn')) setMenu(false);
+    });
+
+    $$('a[href="#faq-size"]').forEach(function (a) {
+      a.addEventListener('click', function () { $('#faq-size').open = true; });
+    });
+    $$('[data-emblem-link]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        setState({ type: 'emblem', motif: 'castle' }, true);
+      });
     });
     var bar = $('#sticky-buy'), sec = $('#constructor');
     if ('IntersectionObserver' in window && bar && sec) {
-      new IntersectionObserver(function (en) { bar.classList.toggle('is-on', en[0].isIntersecting); }, { threshold: 0.05 }).observe(sec);
+      var setBar = function (on) {
+        bar.classList.toggle('is-on', on);
+        document.body.classList.toggle('in-builder', on);
+        if (on) bar.removeAttribute('inert'); else bar.setAttribute('inert', '');
+      };
+      setBar(false);
+      new IntersectionObserver(function (en) { setBar(en[0].isIntersecting); }, { threshold: 0.05 }).observe(sec);
     }
   }
+
+  window.addEventListener('load', function () {
+    var l = document.createElement('link');
+    l.rel = 'stylesheet';
+    l.href = 'https://fonts.googleapis.com/css2?family=Marck+Script&family=Ruslan+Display&display=swap&text=' +
+      encodeURIComponent('АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯабвгґдеєжзиіїйклмнопрстуфхцчшщьюяABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .,!?«»—–-’ʼ\'"&¾');
+    document.head.appendChild(l);
+  });
 
   document.addEventListener('DOMContentLoaded', function () {
     $$('[data-days]').forEach(function (el) { el.textContent = CONFIG.productionDays; });
     $$('[data-tg]').forEach(function (el) { el.href = 'https://t.me/' + CONFIG.telegram; });
     heroLoop();
+    var gg = $('#gift-garment');
+    if (gg) renderGarment(gg, { product: 'sweat', color: 'navy', tech: 'embroidery', type: 'crest', house: 'ravenclaw', thread: 'bronze', place: 'center', initials: 'СК' }, { lazy: true });
     bindHouses();
     renderPresets();
     bindBuilder();

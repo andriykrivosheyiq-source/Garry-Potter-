@@ -10,7 +10,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Lora:wght@400;500;600&family=Marck+Script&family=Ruslan+Display&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <script src="app.js" defer></script>
 </head>
@@ -35,7 +35,7 @@
         <span class="cart-count" hidden>0</span>
       </button>
       <button type="button" class="icon-btn menu-btn" id="menu-btn" aria-label="Меню" aria-expanded="false" aria-controls="nav">
-        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="i-open" d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path class="i-close" d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
       </button>
     </div>
   </div>
@@ -65,7 +65,7 @@
       <button type="button" class="hero__pause" id="hero-pause" aria-pressed="false" aria-label="Зупинити зміну факультетів">
         <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path class="i-pause" d="M8 5v14M16 5v14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path class="i-play" d="M8 5l11 7-11 7z" fill="currentColor"/></svg>
       </button>
-      <figcaption class="hero__tag"><span class="dot" aria-hidden="true"></span>Вишивка · герб <span id="hero-house" aria-live="off">Ґрифіндор</span> · ініціали «ГП»</figcaption>
+      <figcaption class="hero__tag"><span class="dot" aria-hidden="true"></span><span>Вишивка · герб <span id="hero-house">Ґрифіндор</span> · ініціали «ГП»</span></figcaption>
     </figure>
   </div>
 </section>
@@ -102,7 +102,7 @@
         <span class="house__cta">Створити з цим гербом →</span>
       </button>
     </div>
-    <p class="note">Не знаєте факультет? Оберіть <a href="#constructor">емблему школи чарівництва</a> — вона підійде будь-кому.</p>
+    <p class="note">Не знаєте факультет? Оберіть <a href="#constructor" data-emblem-link>емблему школи чарівництва</a> — вона підійде будь-кому.</p>
   </div>
 </section>
 
@@ -156,15 +156,16 @@
             </div>
             <div class="field">
               <label class="field__label" for="f-initials">Ініціали (до 3 літер)</label>
-              <input class="input input--initials" id="f-initials" name="initials" type="text" maxlength="3" autocomplete="off" spellcheck="false" placeholder="ГП…">
+              <input class="input input--initials" id="f-initials" name="initials" type="text" maxlength="3" autocomplete="off" spellcheck="false" placeholder="ГП…" aria-describedby="personal-error">
             </div>
           </div>
 
           <div data-for-type="text" hidden>
             <div class="field">
               <label class="field__label" for="f-text">Текст (до 3 рядків)</label>
-              <textarea class="input" id="f-text" name="text" rows="3" maxlength="90" placeholder="напр. «Завжди»…"></textarea>
-              <p class="hint">Перевірте написання — виріб виготовляємо саме з цим текстом.</p>
+              <textarea class="input" id="f-text" name="text" rows="3" maxlength="90" placeholder="напр. «Завжди»…" aria-describedby="personal-error text-long text-hint"></textarea>
+              <p class="hint" id="text-hint">Перевірте написання — виріб виготовляємо саме з цим текстом.</p>
+              <p class="hint hint--warn" id="text-long" hidden>Для грудей ліворуч і рукава радимо до 14 символів у рядку — інакше літери будуть дрібні. Розбийте текст на рядки або оберіть «Груди по центру» чи «Спина».</p>
             </div>
             <div class="field">
               <span class="field__label" id="l-font">Шрифт</span>
@@ -207,6 +208,7 @@
             <p class="buy__note">Виготовлення — <span data-days>5–7</span> днів, потім відправка Новою Поштою.</p>
           </div>
           <button class="btn btn--primary btn--lg" id="add-btn" type="submit">Додати в кошик</button>
+          <p class="buy__error" id="personal-error" role="alert" hidden></p>
           <p class="buy__summary" id="summary"></p>
         </div>
       </div>
@@ -253,8 +255,12 @@
 
 <section class="section gift" id="gift" aria-labelledby="gift-h">
   <div class="wrap gift__in">
-    <div class="gift__photo">
-      <img src="images/model-hoodie-woman.webp" alt="Дівчина в худі з вишивкою" width="825" height="1100" loading="lazy" decoding="async">
+    <div class="gift__scene" aria-hidden="true">
+      <div class="garment gift__garment" id="gift-garment"></div>
+      <div class="gift__card">
+        <p class="gift__card-to">Для Софійки</p>
+        <p class="gift__card-text">З днем народження! Нехай кожен день буде трохи чарівним ✦</p>
+      </div>
     </div>
     <div>
       <h2 id="gift-h">Подарунок, готовий до вручення</h2>
@@ -353,6 +359,7 @@
 </a>
 
 <div class="sticky-buy" id="sticky-buy">
+  <button type="button" class="sticky-buy__preview" aria-label="Показати превʼю дизайну"><span class="garment garment--mini" id="sticky-preview"></span></button>
   <span class="sticky-buy__price" id="price-sticky"></span>
   <button type="button" class="btn btn--primary" id="add-sticky">Додати в кошик</button>
 </div>
@@ -380,10 +387,10 @@
     </div>
 
     <form class="drawer__body checkout" id="checkout" data-step="checkout" hidden novalidate>
-      <div class="field"><label class="field__label" for="c-name">Імʼя та прізвище</label><input class="input" id="c-name" name="name" type="text" autocomplete="name" required placeholder="Як до вас звертатися…"><span class="field__err">Вкажіть імʼя</span></div>
-      <div class="field"><label class="field__label" for="c-phone">Телефон</label><input class="input" id="c-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required pattern="[+0-9 ()\-]{10,}" placeholder="+380 __ ___ __ __"><span class="field__err">Вкажіть номер телефону</span></div>
-      <div class="field"><label class="field__label" for="c-city">Місто</label><input class="input" id="c-city" name="city" type="text" autocomplete="address-level2" required placeholder="Київ…"><span class="field__err">Вкажіть місто</span></div>
-      <div class="field"><label class="field__label" for="c-branch">Відділення Нової Пошти</label><input class="input" id="c-branch" name="branch" type="text" autocomplete="off" required placeholder="Номер або адреса відділення…"><span class="field__err">Вкажіть відділення</span></div>
+      <div class="field"><label class="field__label" for="c-name">Імʼя та прізвище</label><input class="input" id="c-name" name="name" aria-describedby="c-name-err" type="text" autocomplete="name" required placeholder="Як до вас звертатися…"><span class="field__err" id="c-name-err" data-empty="Вкажіть імʼя, щоб менеджер знав, як до вас звертатися."></span></div>
+      <div class="field"><label class="field__label" for="c-phone">Телефон</label><input class="input" id="c-phone" name="phone" aria-describedby="c-phone-err" type="tel" inputmode="tel" autocomplete="tel" required placeholder="050 123 45 67…"><span class="field__err" id="c-phone-err" data-empty="Вкажіть номер телефону, напр. 050 123 45 67."></span></div>
+      <div class="field"><label class="field__label" for="c-city">Місто</label><input class="input" id="c-city" name="city" aria-describedby="c-city-err" type="text" autocomplete="address-level2" required placeholder="Київ…"><span class="field__err" id="c-city-err" data-empty="Вкажіть місто доставки."></span></div>
+      <div class="field"><label class="field__label" for="c-branch">Відділення Нової Пошти</label><input class="input" id="c-branch" name="branch" aria-describedby="c-branch-err" type="text" autocomplete="off" required placeholder="Номер або адреса відділення…"><span class="field__err" id="c-branch-err" data-empty="Вкажіть номер або адресу відділення Нової Пошти."></span></div>
       <fieldset class="field">
         <legend class="field__label">Оплата</legend>
         <label class="radio"><input type="radio" name="pay" value="cod" checked><span>Накладений платіж — оплата при отриманні</span></label>
@@ -399,7 +406,7 @@
 
     <div class="drawer__body" data-step="done" hidden>
       <p class="done__title">Дякуємо! Замовлення майже готове.</p>
-      <p>Ми скопіювали деталі замовлення. Відкрийте Telegram, вставте текст і надішліть — менеджер підтвердить замовлення й уточнить деталі. Після підтвердження почнемо виготовлення.</p>
+      <p id="done-copy" aria-live="polite"></p>
       <label class="field__label" for="order-text">Текст замовлення</label>
       <textarea class="input order-text" id="order-text" rows="9" readonly></textarea>
       <a class="btn btn--primary btn--block" id="tg-link" href="#" target="_blank" rel="noopener">Відкрити Telegram</a>
