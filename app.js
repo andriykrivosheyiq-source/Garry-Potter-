@@ -793,7 +793,7 @@
     renderCart();
     bindNav();
     var gg = $('#gift-garment');
-    if (gg) renderGarment(gg, assign({}, DEFAULT, { product: 'sweat', color: 'bordo', tech: 'embroidery', place: 'center', type: 'emblem', motif: 'tree', caption: '25.12', thread: 'gold' }), { lazy: true });
+    if (gg) renderGarment(gg, assign({}, DEFAULT, { product: 'sweat', color: 'graphite', tech: 'embroidery', place: 'center', type: 'emblem', motif: 'tree', caption: '25.12', thread: 'white' }), { lazy: true });
     var y = $('#year'); if (y) y.textContent = new Date().getFullYear();
   });
 })();
