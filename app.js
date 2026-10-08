@@ -270,7 +270,7 @@
     }
     html += '</div>';
     // Вставка з дизайном крупним планом — для малих місць нанесення, де на мініатюрі його не видно.
-    if (opts.closeup && showDesign && !BIG[s.place]) {
+    if (opts.closeup && showDesign && pl.fw * shot[4] / 100 * W < 0.25) {
       html += '<div class="garment__closeup" style="background:' + col.hex + '" aria-hidden="true">' + designSVG(s) + '</div>';
     }
     el.innerHTML = html;
@@ -602,7 +602,7 @@
         '<span class="cart-item__price">' + money(i.price * i.qty) + '</span></div>' +
         '<button type="button" class="link-btn" data-remove>Видалити</button></div></li>';
     }).join('');
-    cart.forEach(function (i) { renderGarment(list.querySelector('[data-thumb="' + i.key + '"]'), i, { closeup: true }); });
+    cart.forEach(function (i) { renderGarment(list.querySelector('[data-thumb="' + i.key + '"]'), i); });
     $('#cart-total').textContent = money(total());
     $('#checkout-total').textContent = money(total());
   }
