@@ -270,7 +270,7 @@
     }
     html += '</div>';
     // Вставка з дизайном крупним планом — для малих місць нанесення, де на мініатюрі його не видно.
-    if (opts.closeup && showDesign && pl.fw * shot[4] / 100 * W < 0.25) {
+    if (opts.closeup && showDesign && !BIG[s.place] && s.place !== 'tote' && s.place !== 'capfront' && pl.fw * shot[4] / 100 * W < 0.25) {
       html += '<div class="garment__closeup" style="background:' + col.hex + '" aria-hidden="true">' + designSVG(s) + '</div>';
     }
     el.innerHTML = html;
