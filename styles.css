@@ -87,9 +87,11 @@ button { font: inherit; color: inherit; }
 }
 
 /* Виріб + дизайн */
-.garment { position: relative; aspect-ratio: var(--ratio, 1); width: 100%; background: #F3F3F3; overflow: hidden; }
-.garment__zoom { position: absolute; inset: 0; }
-.garment img { width: 100%; height: 100%; object-fit: contain; }
+.garment { position: relative; aspect-ratio: 1; width: 100%; max-width: 100%; background: #F3F3F3; overflow: hidden; }
+.garment__frame { position: absolute; }
+.garment__closeup { position: absolute; right: 6%; bottom: 6%; width: 34%; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; padding: 6%; border: 3px solid #fff; box-shadow: 0 4px 14px rgba(28, 26, 31, .18); }
+.garment__closeup svg { width: 100%; height: 100%; }
+.garment__frame img { width: 100%; height: 100%; display: block; }
 .garment__design { position: absolute; transform: translate(-50%, -50%); pointer-events: none; }
 .garment__design svg { width: 100%; height: auto; display: block; overflow: visible; }
 .garment__design--print svg { opacity: .94; }
@@ -202,7 +204,7 @@ button { font: inherit; color: inherit; }
 .design-card { display: flex; flex-direction: column; border-radius: var(--radius); border: 1px solid var(--line); background: #fff; overflow: hidden; transition: box-shadow .25s, transform .25s; }
 .design-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
 .design-card__media { aspect-ratio: 1; display: flex; align-items: center; padding: 14px 14px 0; }
-.garment--card { background: #fff; }
+.garment--card { border-radius: 12px; }
 .design-card__body { display: flex; flex-direction: column; gap: 6px; padding: 14px 18px 18px; flex: 1; }
 .design-card h3 { font-size: 22px; }
 .design-card p { font-size: 14px; color: var(--muted); flex: 1; }
@@ -289,7 +291,7 @@ button { font: inherit; color: inherit; }
 .cart-empty .btn { width: 100%; }
 .cart-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
 .cart-item { display: grid; grid-template-columns: 88px 1fr; gap: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
-.garment--thumb { background: var(--bg-alt); border-radius: 12px; padding: 4px; align-self: start; }
+.garment--thumb { border-radius: 12px; align-self: start; }
 .cart-item__info { display: grid; gap: 4px; font-size: 14px; min-width: 0; }
 .cart-item__info strong { font-size: 16px; }
 .cart-item__info > span { color: var(--muted); overflow-wrap: anywhere; }
@@ -367,7 +369,7 @@ button { font: inherit; color: inherit; }
 .how li { border: 1px solid var(--line); }
 @media (min-width: 901px) { html { scroll-padding-bottom: 24px; } }
 @media (max-width: 900px) {
-  .garment--step { display: block; width: 46%; max-width: 180px; margin: -4px auto 16px; border-radius: 14px; }
+  .garment--step { display: block; width: 62%; max-width: 240px; margin: -4px auto 16px; border-radius: 14px; }
   .works { scroll-padding-inline: 16px; }
   /* Мобільний hero: товар одразу під заголовком */
   .hero__in { display: flex; flex-direction: column; gap: 0; }

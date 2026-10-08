@@ -257,18 +257,21 @@
     var pl = placeOf(s);
     var showDesign = (pl.view || 'front') === view;
     var alt = productName(s.product) + ', ' + col.name.toLowerCase() + (view === 'back' ? ', вигляд ззаду' : view === 'left' ? ', вигляд збоку' : '');
-    el.style.setProperty('--ratio', shot[0] / shot[1]);
-    var html = '<img src="images/g/' + s.product + '-' + col.id + '-' + view + '.webp" alt="' + esc(alt) + '" width="' + shot[0] + '" height="' + shot[1] + '"' + (opts.lazy ? ' loading="lazy"' : '') + ' decoding="async">';
+    // Кадр: квадрат, у якому виріб (його межі на фото) займає однакову частку —
+    // тож різні кольори й моделі одного виробу не «стрибають» за розміром.
+    var ratio = shot[0] / shot[1], fill = opts.fill || 0.86;
+    var H = fill / Math.max(shot[4] / 100 * ratio, shot[5] / 100), W = H * ratio;
+    var left = 0.5 - (shot[2] + shot[4] / 2) / 100 * W, top = 0.5 - (shot[3] + shot[5] / 2) / 100 * H;
+    var html = '<div class="garment__frame" style="left:' + (left * 100).toFixed(2) + '%;top:' + (top * 100).toFixed(2) + '%;width:' + (W * 100).toFixed(2) + '%;height:' + (H * 100).toFixed(2) + '%">' +
+      '<img src="images/g/' + s.product + '-' + col.id + '-' + view + '.webp" alt="' + esc(alt) + '" width="' + shot[0] + '" height="' + shot[1] + '"' + (opts.lazy ? ' loading="lazy"' : '') + ' decoding="async">';
     if (showDesign) {
-      var w = pl.fw * shot[4] * (opts.scale || 1);
-      html += '<div class="garment__design garment__design--' + s.tech + '" style="left:' + (shot[2] + pl.fx * shot[4]).toFixed(2) + '%;top:' + (shot[3] + pl.fy * shot[5]).toFixed(2) + '%;width:' + w.toFixed(2) + '%;' +
+      html += '<div class="garment__design garment__design--' + s.tech + '" style="left:' + (shot[2] + pl.fx * shot[4]).toFixed(2) + '%;top:' + (shot[3] + pl.fy * shot[5]).toFixed(2) + '%;width:' + (pl.fw * shot[4]).toFixed(2) + '%;' +
         (pl.rot ? 'transform:translate(-50%,-50%) rotate(' + pl.rot + 'deg)' : '') + '">' + designSVG(s) + '</div>';
     }
-    // zoom: збільшуємо всю сцену навколо місця нанесення — дизайн лишається в реальному масштабі відносно виробу
-    var z = opts.zoom || 1;
-    if (z > 1 && showDesign) {
-      var ox = shot[2] + pl.fx * shot[4], oy = shot[3] + pl.fy * shot[5];
-      html = '<div class="garment__zoom" style="transform-origin:' + ox.toFixed(1) + '% ' + oy.toFixed(1) + '%;transform:scale(' + z + ')">' + html + '</div>';
+    html += '</div>';
+    // Вставка з дизайном крупним планом — для малих місць нанесення, де на мініатюрі його не видно.
+    if (opts.closeup && showDesign && !BIG[s.place]) {
+      html += '<div class="garment__closeup" style="background:' + col.hex + '" aria-hidden="true">' + designSVG(s) + '</div>';
     }
     el.innerHTML = html;
   }
@@ -373,7 +376,7 @@
     var garmentHex = colorOf(state.product, state.color).hex;
     $('#thread-warn').hidden = (state.type === 'hogwarts' && !(state.caption || '').trim()) || contrast(garmentHex, THREADS[state.thread].hex) >= 3;
     var p3 = $('#preview-step3');
-    if (p3 && getComputedStyle(p3).display !== 'none') renderGarment(p3, state, { view: viewOf(state), zoom: BIG[state.place] ? 1 : 1.7 });
+    if (p3 && getComputedStyle(p3).display !== 'none') renderGarment(p3, state, { view: viewOf(state), closeup: true });
     var mini = $('#sticky-preview');
     if (mini) { mini.style.background = garmentHex; mini.innerHTML = designSVG(state); }
   }
@@ -481,7 +484,7 @@
     }).join('');
     list.forEach(function (o) {
       var s = assign({}, DEFAULT, o.x.s);
-      renderGarment(grid.querySelector('[data-idea-preview="' + o.i + '"]'), s, { lazy: true, zoom: BIG[s.place] ? 1 : 2 });
+      renderGarment(grid.querySelector('[data-idea-preview="' + o.i + '"]'), s, { lazy: true, closeup: true });
     });
     $$('#idea-filter [data-filter]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-filter') === ideaFilter)); });
   }
@@ -599,7 +602,7 @@
         '<span class="cart-item__price">' + money(i.price * i.qty) + '</span></div>' +
         '<button type="button" class="link-btn" data-remove>Видалити</button></div></li>';
     }).join('');
-    cart.forEach(function (i) { renderGarment(list.querySelector('[data-thumb="' + i.key + '"]'), i, { zoom: BIG[i.place] ? 1 : 2.2 }); });
+    cart.forEach(function (i) { renderGarment(list.querySelector('[data-thumb="' + i.key + '"]'), i, { closeup: true }); });
     $('#cart-total').textContent = money(total());
     $('#checkout-total').textContent = money(total());
   }
