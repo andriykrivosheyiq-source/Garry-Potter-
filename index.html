@@ -62,8 +62,7 @@
       </ul>
     </div>
     <figure class="hero__visual">
-      <div class="hero__glow" aria-hidden="true"></div>
-      <button type="button" class="hero__pause" id="hero-pause" aria-pressed="false" aria-label="Зупинити показ прикладів">
+            <button type="button" class="hero__pause" id="hero-pause" aria-pressed="false" aria-label="Зупинити показ прикладів">
         <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path class="i-pause" d="M8 5v14M16 5v14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path class="i-play" d="M8 5l11 7-11 7z" fill="currentColor"/></svg>
       </button>
       <div class="garment garment--hero" id="hero-garment"></div>
@@ -91,7 +90,7 @@
 <section class="section section--alt" id="ideas" aria-labelledby="ideas-h">
   <div class="wrap">
     <div class="section__head">
-      <h2 id="ideas-h">Готові ідеї</h2>
+      <h2 id="ideas-h" tabindex="-1">Готові ідеї</h2>
       <p>Натисніть «Персоналізувати» — ідея відкриється в конструкторі, і ви заміните текст, колір чи виріб.</p>
     </div>
     <div class="filters" id="idea-filter" role="group" aria-label="Привід"></div>
@@ -103,7 +102,7 @@
 <section class="section builder-sec" id="constructor" aria-labelledby="constructor-h">
   <div class="wrap">
     <div class="section__head">
-      <h2 id="constructor-h">Створіть свій подарунок</h2>
+      <h2 id="constructor-h" tabindex="-1">Створіть свій подарунок</h2>
       <p>Три кроки — і ви бачите, як він виглядатиме. Ціна оновлюється одразу.</p>
     </div>
 
@@ -183,12 +182,13 @@
 
         <fieldset class="step">
           <legend><span class="step__n" aria-hidden="true">3</span>Техніка, колір і місце</legend>
+          <div class="garment garment--step" id="preview-step3" aria-hidden="true"></div>
           <div class="field">
             <span class="field__label" id="l-tech">Техніка</span>
             <div class="chips" id="f-tech" role="radiogroup" aria-labelledby="l-tech"></div>
             <p class="hint">Вишивка — обʼємна й довговічна, найкраще для коротких написів і ініціалів. Принт — точніше передає дрібні деталі й великі зображення.</p>
           </div>
-          <div class="field" data-for-type="text initials emblem">
+          <div class="field" data-for-type="text initials emblem hogwarts">
             <span class="field__label" id="l-thread"><span id="thread-label">Колір нитки</span>: <b id="thread-name"></b></span>
             <div class="swatches" id="f-thread" role="radiogroup" aria-labelledby="l-thread"></div>
             <p class="hint hint--warn" id="thread-warn" hidden>Цей колір майже зливається з виробом — оберіть контрастніший.</p>
@@ -297,7 +297,7 @@
     <h2 id="final-h">Залишилось обрати, що вишити</h2>
     <p>Оберіть виріб, впишіть ініціали чи дату й побачите результат одразу. Макет погодимо до оплати.</p>
     <div class="hero__cta">
-      <a class="btn btn--gold" href="#constructor">Створити свій</a>
+      <a class="btn btn--primary btn--on-dark" href="#constructor">Створити свій</a>
       <a class="btn btn--ghost-light" href="#ideas">Готові ідеї</a>
     </div>
   </div>

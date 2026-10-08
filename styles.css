@@ -1,4 +1,4 @@
-/* Чарівна Нитка — стилі. Токени з .claude/brand.md */
+/* На подарунок — стилі. Токени з .claude/brand.md */
 :root {
   --bg: #FFFFFF;
   --bg-alt: #F7F3EA;
@@ -68,7 +68,7 @@ button { font: inherit; color: inherit; }
 /* Шапка */
 .header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 40; background: rgba(255, 255, 255, .92); backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--line); }
 .header__in { display: flex; align-items: center; gap: 24px; height: var(--header); }
-.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 700 24px/1 var(--serif-d); }
+.logo { min-height: 44px; display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 700 24px/1 var(--serif-d); }
 .nav { display: flex; gap: 28px; margin-left: auto; }
 .nav a { text-decoration: none; font-size: 15px; color: var(--ink); padding: 8px 0; border-bottom: 1.5px solid transparent; transition: border-color .2s; }
 .nav a:hover { border-color: var(--gold); }
@@ -87,7 +87,8 @@ button { font: inherit; color: inherit; }
 }
 
 /* Виріб + дизайн */
-.garment { position: relative; aspect-ratio: var(--ratio, 1); width: 100%; }
+.garment { position: relative; aspect-ratio: var(--ratio, 1); width: 100%; background: #F3F3F3; overflow: hidden; }
+.garment__zoom { position: absolute; inset: 0; }
 .garment img { width: 100%; height: 100%; object-fit: contain; }
 .garment__design { position: absolute; transform: translate(-50%, -50%); pointer-events: none; }
 .garment__design svg { width: 100%; height: auto; display: block; overflow: visible; }
@@ -104,9 +105,9 @@ button { font: inherit; color: inherit; }
 .trust li::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); }
 .hero__visual { position: relative; margin: 0; }
 .hero__glow { position: absolute; inset: 8% 4%; border-radius: 50%; background: radial-gradient(closest-side, rgba(201, 162, 39, .22), rgba(201, 162, 39, 0)); }
-.garment--hero { max-width: 520px; margin: 0 auto; mix-blend-mode: multiply; }
+.garment--hero { max-width: 520px; margin: 0 auto; border-radius: 28px; }
 .hero__tag { position: absolute; left: 50%; bottom: 4%; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 9px 16px; font-size: 14px; box-shadow: var(--shadow); }
-.hero__pause { position: absolute; left: 4%; top: 4%; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: #fff; color: var(--ink); cursor: pointer; box-shadow: var(--shadow); transition: border-color .2s; }
+.hero__pause { z-index: 2; position: absolute; left: 4%; top: 4%; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: #fff; color: var(--ink); cursor: pointer; box-shadow: var(--shadow); transition: border-color .2s; }
 .hero__pause:hover { border-color: var(--ink); }
 .hero__pause .i-play { display: none; }
 .hero__pause[aria-pressed="true"] .i-play { display: block; }
@@ -130,34 +131,13 @@ button { font: inherit; color: inherit; }
 .note { text-align: center; margin-top: 28px; color: var(--muted); }
 .note a { color: var(--cta); text-underline-offset: 3px; }
 
-/* Факультети */
-.houses__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-.house { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 22px 22px 24px; border-radius: var(--radius); border: 1px solid var(--line); background: #fff; text-align: left; cursor: pointer; overflow: hidden; transition: transform .25s, box-shadow .25s, border-color .25s; }
-.house::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 6px; background: linear-gradient(90deg, var(--c1) 0 70%, var(--c2) 70%); }
-.house:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--c1); }
-.house--gryffindor { --c1: var(--g); --c2: var(--g2); }
-.house--slytherin { --c1: var(--s); --c2: var(--s2); }
-.house--ravenclaw { --c1: var(--r); --c2: var(--r2); }
-.house--hufflepuff { --c1: var(--h); --c2: var(--h2); }
-.house__crest { width: 64px; margin: 6px 0 4px; }
-.house__crest svg { width: 100%; height: auto; display: block; }
-.house__name { font: 700 26px/1.1 var(--serif-d); }
-.house__desc { color: var(--muted); font-size: 15px; line-height: 1.5; flex: 1; }
-.house__cta { margin-top: 8px; font-weight: 600; font-size: 15px; color: var(--cta); }
-@media (max-width: 1000px) { .houses__grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 520px) {
-  .houses__grid { gap: 12px; }
-  .house { padding: 16px 14px 18px; }
-  .house__crest { width: 48px; }
-  .house__name { font-size: 22px; }
-  .house__desc { font-size: 14px; }
-  .house__cta { font-size: 14px; }
-}
 
 /* Конструктор */
 .builder { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: start; }
 .builder__preview { position: sticky; top: calc(var(--header) + 16px); }
 .preview-card { background: #fff; border-radius: 24px; padding: 24px; box-shadow: var(--shadow); }
+.garment--preview { border-radius: 16px; }
+.garment--step { display: none; }
 .garment--preview { max-width: 520px; margin: 0 auto; }
 .preview-card__sides { display: flex; justify-content: center; gap: 6px; margin-top: 12px; padding: 4px; background: var(--bg-alt); border-radius: 999px; width: max-content; margin-inline: auto; }
 .seg { min-height: 44px; padding: 0 18px; border-radius: 999px; border: 0; background: transparent; cursor: pointer; font-size: 15px; }
@@ -237,19 +217,11 @@ button { font: inherit; color: inherit; }
   .design-card__foot .btn { width: 100%; }
 }
 
-/* Порівняння */
-.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: 900px; margin: 0 auto; }
-.compare__card { background: #fff; border-radius: var(--radius); padding: 28px; }
-.compare__card h3 { font-size: 30px; padding-bottom: 12px; border-bottom: 2px solid var(--gold); display: inline-block; }
-.compare dl { margin: 18px 0 0; display: grid; gap: 4px; }
-.compare dt { font-size: 13px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-top: 12px; }
-.compare dd { margin: 0; font-size: 17px; }
-@media (max-width: 700px) { .compare { grid-template-columns: 1fr; } .compare__card { padding: 22px; } }
 
 /* Подарунок */
 .gift__in { display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: center; }
 .gift__scene { position: relative; border-radius: 24px; background: var(--bg-alt); padding: 32px 32px 96px; }
-.gift__garment { max-width: 420px; margin: 0 auto; mix-blend-mode: multiply; }
+.gift__garment { max-width: 420px; margin: 0 auto; border-radius: 20px; }
 .gift__card { position: absolute; right: 7%; bottom: 28px; width: min(250px, 60%); background: #fff; border-radius: 6px; padding: 18px 18px 16px; box-shadow: 0 12px 30px rgba(28, 26, 31, .14); transform: rotate(-3deg); border-top: 4px solid var(--gold); }
 .gift__card-to { font: 700 22px/1.1 var(--serif-d); margin-bottom: 6px; }
 .gift__card-text { font-size: 14px; color: var(--muted); line-height: 1.45; }
@@ -268,14 +240,6 @@ button { font: inherit; color: inherit; }
 .how p { color: var(--muted); }
 @media (max-width: 760px) { .how { grid-template-columns: 1fr; } .how li { padding: 20px; } }
 
-/* Відгуки */
-.reviews { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-.review { margin: 0; padding: 24px; border: 1px solid var(--line); border-radius: var(--radius); display: flex; flex-direction: column; gap: 16px; }
-.review::before { content: '★★★★★'; color: var(--gold); letter-spacing: 2px; }
-.review p { flex: 1; font-size: 15px; }
-.review footer { font-weight: 600; font-size: 14px; }
-@media (max-width: 1000px) { .reviews { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 560px) { .reviews { grid-template-columns: 1fr; } }
 
 /* FAQ */
 .faq { display: grid; gap: 10px; }
@@ -395,3 +359,25 @@ button { font: inherit; color: inherit; }
 .more { display: flex; justify-content: center; margin-top: 28px; }
 .more .btn[hidden] { display: none; }
 @media (max-width: 640px) { .more .btn { width: 100%; } }
+
+.btn--on-dark { box-shadow: 0 0 0 1.5px rgba(255, 255, 255, .55); }
+.btn--on-dark:hover { background: var(--cta-hover); }
+.design-card__media .garment { border-radius: 12px; }
+.faq details { border: 1px solid var(--line); }
+.how li { border: 1px solid var(--line); }
+@media (min-width: 901px) { html { scroll-padding-bottom: 24px; } }
+@media (max-width: 900px) {
+  .garment--step { display: block; width: 46%; max-width: 180px; margin: -4px auto 16px; border-radius: 14px; }
+  .works { scroll-padding-inline: 16px; }
+  /* Мобільний hero: товар одразу під заголовком */
+  .hero__in { display: flex; flex-direction: column; gap: 0; }
+  .hero__text { display: contents; }
+  .hero .eyebrow { order: 1; }
+  .hero h1 { order: 2; }
+  .hero__visual { order: 3; width: 100%; max-width: 300px; margin: 18px auto 4px; }
+  .hero .lead { order: 4; }
+  .hero__cta { order: 5; }
+  .trust { order: 6; }
+  .hero__tag { position: static; transform: none; margin: 10px auto 0; display: flex; width: max-content; max-width: 100%; white-space: normal; text-align: center; }
+  .hero__pause { left: 8px; top: 8px; }
+}

@@ -20,27 +20,26 @@
   var PRODUCTS = {
     teeover: { surcharge: 0, sizes: APPAREL_SIZES, places: {
       chest: { fx: 0.64, fy: 0.22, fw: 0.13 }, center: { fx: 0.47, fy: 0.31, fw: 0.36 },
-      back: { view: 'back', fx: 0.47, fy: 0.27, fw: 0.40 }, sleeve: { fx: 0.12, fy: 0.33, fw: 0.08, rot: -22 } } },
+      back: { view: 'back', fx: 0.47, fy: 0.32, fw: 0.38 }, sleeve: { fx: 0.12, fy: 0.33, fw: 0.08, rot: -22 } } },
     tee: { surcharge: 0, sizes: APPAREL_SIZES, places: {
       chest: { fx: 0.64, fy: 0.21, fw: 0.13 }, center: { fx: 0.5, fy: 0.30, fw: 0.36 },
-      back: { view: 'back', fx: 0.5, fy: 0.26, fw: 0.40 }, sleeve: { fx: 0.11, fy: 0.25, fw: 0.08, rot: -28 } } },
+      back: { view: 'back', fx: 0.5, fy: 0.31, fw: 0.38 }, sleeve: { fx: 0.11, fy: 0.25, fw: 0.08, rot: -28 } } },
     hoodieover: { surcharge: 250, sizes: APPAREL_SIZES, places: {
-      chest: { fx: 0.62, fy: 0.34, fw: 0.12 }, center: { fx: 0.5, fy: 0.41, fw: 0.30 },
+      chest: { fx: 0.62, fy: 0.34, fw: 0.12 }, center: { fx: 0.5, fy: 0.37, fw: 0.24 },
       back: { view: 'back', fx: 0.5, fy: 0.44, fw: 0.36 }, sleeve: { fx: 0.09, fy: 0.56, fw: 0.07, rot: -5 } } },
     hoodieoverfleece: { surcharge: 300, sizes: APPAREL_SIZES, places: {
-      chest: { fx: 0.62, fy: 0.33, fw: 0.12 }, center: { fx: 0.5, fy: 0.40, fw: 0.30 },
+      chest: { fx: 0.62, fy: 0.33, fw: 0.12 }, center: { fx: 0.5, fy: 0.36, fw: 0.24 },
       back: { view: 'back', fx: 0.5, fy: 0.44, fw: 0.36 }, sleeve: { fx: 0.07, fy: 0.56, fw: 0.07, rot: -4 } } },
     hoodie: { surcharge: 250, sizes: APPAREL_SIZES, places: {
-      chest: { fx: 0.62, fy: 0.33, fw: 0.12 }, center: { fx: 0.5, fy: 0.42, fw: 0.30 },
+      chest: { fx: 0.62, fy: 0.33, fw: 0.12 }, center: { fx: 0.5, fy: 0.38, fw: 0.25 },
       back: { view: 'back', fx: 0.5, fy: 0.44, fw: 0.36 }, sleeve: { fx: 0.08, fy: 0.56, fw: 0.07, rot: -3 } } },
     hoodiezip: { surcharge: 300, sizes: APPAREL_SIZES, places: {
-      chest: { fx: 0.68, fy: 0.33, fw: 0.11 },
-      back: { view: 'back', fx: 0.5, fy: 0.44, fw: 0.36 }, sleeve: { fx: 0.08, fy: 0.56, fw: 0.07, rot: -3 } } },
+      chest: { fx: 0.68, fy: 0.33, fw: 0.11 }, sleeve: { fx: 0.08, fy: 0.56, fw: 0.07, rot: -3 } } },
     sweat: { surcharge: 200, sizes: APPAREL_SIZES, places: {
       chest: { fx: 0.63, fy: 0.21, fw: 0.12 }, center: { fx: 0.5, fy: 0.30, fw: 0.32 },
       back: { view: 'back', fx: 0.5, fy: 0.30, fw: 0.36 }, sleeve: { fx: 0.075, fy: 0.42, fw: 0.07, rot: -3 } } },
     cap: { surcharge: 90, sizes: null, places: {
-      capfront: { fx: 0.5, fy: 0.37, fw: 0.30 }, capside: { view: 'left', fx: 0.57, fy: 0.42, fw: 0.20, rot: -8 } } },
+      capfront: { fx: 0.5, fy: 0.37, fw: 0.30 }, capside: { view: 'left', fx: 0.56, fy: 0.52, fw: 0.18, rot: -8 } } },
     tote: { surcharge: 90, sizes: null, places: {
       tote: { fx: 0.5, fy: 0.72, fw: 0.48 } } }
   };
@@ -88,7 +87,7 @@
     { o: 'colleagues', title: 'Ініціали на кепці', desc: 'Дві літери з крапками збоку кепки.', s: { product: 'cap', color: 'beige', tech: 'embroidery', place: 'capside', type: 'initials', initials: 'О.К.', istyle: 'plain', thread: 'navy' } },
     { o: 'newyear', title: 'Рік на рукаві', desc: 'Новий рік цифрами на рукаві.', s: { product: 'sweat', color: 'darkgreen', tech: 'embroidery', place: 'sleeve', type: 'text', text: '2027', font: 'modern', thread: 'white' } },
     { o: 'newyear', title: 'Одна сніжинка', desc: 'Невелика сніжинка на грудях, без тексту.', s: { product: 'hoodieoverfleece', color: 'blue', tech: 'embroidery', place: 'chest', type: 'emblem', motif: 'snowflake', caption: '', thread: 'white' } },
-    { o: 'newyear', title: 'Family-набір', desc: 'Однакова монограма родини на худі для кожного.', s: { product: 'hoodie', color: 'vanilla', tech: 'embroidery', place: 'chest', type: 'initials', initials: 'К', istyle: 'circle', thread: 'bordo' } },
+    { o: 'newyear', title: 'Набір для родини', desc: 'Однакова монограма родини на худі для кожного.', s: { product: 'hoodie', color: 'vanilla', tech: 'embroidery', place: 'chest', type: 'initials', initials: 'К', istyle: 'circle', thread: 'bordo' } },
     { o: 'newyear', title: 'Зимова кепка', desc: 'Короткий напис із сезоном спереду.', s: { product: 'cap', color: 'black', tech: 'embroidery', place: 'capfront', type: 'text', text: 'зима 26/27', font: 'modern', thread: 'white' } },
     { o: 'xmas', title: 'Ялинка й дата', desc: 'Маленька ялинка, під нею дата свята.', s: { product: 'sweat', color: 'bordo', tech: 'embroidery', place: 'chest', type: 'emblem', motif: 'tree', caption: '25.12', thread: 'gold' } },
     { o: 'xmas', title: 'Зірка на рукаві', desc: 'Одна золота зірка на рукаві.', s: { product: 'hoodiezip', color: 'navy', tech: 'embroidery', place: 'sleeve', type: 'emblem', motif: 'star', caption: '', thread: 'gold' } },
@@ -180,7 +179,7 @@
     var c = paint(id, t.hex, s.tech);
     var serif = "'Cormorant Garamond', Georgia, serif";
     if (s.istyle === 'circle') {
-      var fsC = txt.length > 2 ? 160 / (txt.length * 0.55) : 92;
+      var fsC = Math.min(92, 118 / Math.max(1, txt.length * 0.62));
       return '<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Монограма ' + esc(txt) + '">' + defs(id, t.hex, s.tech) +
         '<g' + fx(id, s.tech) + '><circle cx="100" cy="100" r="88" fill="none" stroke="' + c + '" stroke-width="7"/><circle cx="100" cy="100" r="76" fill="none" stroke="' + c + '" stroke-width="2.5"/>' +
         '<text x="100" y="' + (100 + fsC * 0.33).toFixed(1) + '" text-anchor="middle" font-family="' + serif + '" font-weight="700" font-size="' + fsC.toFixed(1) + '" fill="' + c + '">' + esc(txt) + '</text></g></svg>';
@@ -229,11 +228,11 @@
   function hogwartsSVG(s, id) {
     var t = THREADS[s.thread] || THREADS.gold;
     var cap = (s.caption || '').trim().slice(0, 20);
-    var H = cap ? 276 : 230;
+    var H = cap ? 280 : 234;
     var c = paint(id, t.hex, s.tech);
     return '<svg viewBox="0 0 200 ' + H + '" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Герб Гоґвортсу' + (cap ? ', ' + esc(cap) : '') + '">' + defs(id, t.hex, s.tech) +
-      '<image href="images/crest/hogwarts.webp" x="0" y="0" width="200" height="230"' + (s.tech === 'embroidery' ? ' filter="url(#sh' + id + ')"' : '') + '/>' +
-      (cap ? '<g' + fx(id, s.tech) + '>' + captionText(cap, 266, c) + '</g>' : '') + '</svg>';
+      '<image href="images/crest/hogwarts.webp" x="0" y="0" width="200" height="234"' + (s.tech === 'embroidery' ? ' filter="url(#sh' + id + ')"' : '') + '/>' +
+      (cap ? '<g' + fx(id, s.tech) + '>' + captionText(cap, 270, c) + '</g>' : '') + '</svg>';
   }
 
   function designSVG(s) {
@@ -265,6 +264,12 @@
       html += '<div class="garment__design garment__design--' + s.tech + '" style="left:' + (shot[2] + pl.fx * shot[4]).toFixed(2) + '%;top:' + (shot[3] + pl.fy * shot[5]).toFixed(2) + '%;width:' + w.toFixed(2) + '%;' +
         (pl.rot ? 'transform:translate(-50%,-50%) rotate(' + pl.rot + 'deg)' : '') + '">' + designSVG(s) + '</div>';
     }
+    // zoom: збільшуємо всю сцену навколо місця нанесення — дизайн лишається в реальному масштабі відносно виробу
+    var z = opts.zoom || 1;
+    if (z > 1 && showDesign) {
+      var ox = shot[2] + pl.fx * shot[4], oy = shot[3] + pl.fy * shot[5];
+      html = '<div class="garment__zoom" style="transform-origin:' + ox.toFixed(1) + '% ' + oy.toFixed(1) + '%;transform:scale(' + z + ')">' + html + '</div>';
+    }
     el.innerHTML = html;
   }
 
@@ -275,11 +280,12 @@
   function whatOf(s) {
     if (s.type === 'text') return 'напис «' + String(s.text || '').replace(/\n/g, ' / ') + '», шрифт ' + FONTS[s.font].name.toLowerCase();
     if (s.type === 'initials') return 'ініціали «' + (s.initials || '') + '», ' + INITIAL_STYLES[s.istyle].toLowerCase();
-    if (s.type === 'hogwarts') return 'герб Гоґвортсу' + (s.caption ? ', підпис «' + s.caption + '»' : '');
+    if (s.type === 'hogwarts') return 'герб Гоґвортсу (повноколірний)' + (s.caption ? ', підпис «' + s.caption + '»' : '');
     return 'емблема «' + MOTIFS[s.motif] + '»' + (s.caption ? ', підпис «' + s.caption + '»' : '');
   }
   function describe(s) {
-    return TECH[s.tech] + ': ' + whatOf(s) + '; колір — ' + THREADS[s.thread].name.toLowerCase() + '; ' + PLACES[s.place].toLowerCase();
+    var col = (s.type === 'hogwarts' && !(s.caption || '').trim()) ? '' : '; колір ' + (s.type === 'hogwarts' ? 'підпису' : '') + ' — ' + THREADS[s.thread].name.toLowerCase();
+    return TECH[s.tech] + ': ' + whatOf(s) + col.replace('колір  —', 'колір —') + '; ' + PLACES[s.place].toLowerCase();
   }
   function sizeLabel(s) { return PRODUCTS[s.product].sizes ? s.size : 'універсальний'; }
 
@@ -329,7 +335,7 @@
     $('#f-initials').value = state.initials || '';
     $('#f-text').value = state.text || '';
     $('#f-caption').value = state.caption || '';
-    $('#thread-label').textContent = state.tech === 'embroidery' ? 'Колір нитки' : 'Колір принта';
+    $('#thread-label').textContent = state.type === 'hogwarts' ? 'Колір підпису' : state.tech === 'embroidery' ? 'Колір нитки' : 'Колір принта';
     $('#color-name').textContent = colorOf(state.product, state.color).name;
     $('#thread-name').textContent = THREADS[state.thread].name;
     $$('[data-for-type]').forEach(function (el) { el.hidden = el.getAttribute('data-for-type').split(' ').indexOf(state.type) < 0; });
@@ -343,8 +349,11 @@
     return null;
   }
 
+  var lastPlaceKey = '';
   function update() {
-    previewView = viewOf(state);
+    var key = state.product + '|' + state.place;
+    if (key !== lastPlaceKey) { previewView = viewOf(state); lastPlaceKey = key; }
+    if (viewsOf(state.product).indexOf(previewView) < 0) previewView = viewOf(state);
     renderGarment($('#preview'), state, { view: previewView });
     renderSides();
     var price = money(priceOf(state));
@@ -357,9 +366,14 @@
     }
     var small = !BIG[state.place];
     var longest = Math.max.apply(null, String(state.text || '').split('\n').map(function (l) { return l.trim().length; }));
-    $('#text-long').hidden = !(state.type === 'text' && small && longest > 14);
+    $('#text-long').hidden = !(state.type === 'text' && longest > (small ? 14 : 22));
+    $('#text-long').textContent = small
+      ? 'Для малих місць радимо до 14 символів у рядку — інакше літери будуть дрібні. Розбийте текст на рядки або оберіть «Груди по центру» чи «Спина».'
+      : 'Довгий рядок вийде дрібним — радимо до 22 символів у рядку. Розбийте текст на 2–3 рядки.';
     var garmentHex = colorOf(state.product, state.color).hex;
-    $('#thread-warn').hidden = state.type === 'hogwarts' || contrast(garmentHex, THREADS[state.thread].hex) >= 2.5;
+    $('#thread-warn').hidden = (state.type === 'hogwarts' && !(state.caption || '').trim()) || contrast(garmentHex, THREADS[state.thread].hex) >= 3;
+    var p3 = $('#preview-step3');
+    if (p3 && getComputedStyle(p3).display !== 'none') renderGarment(p3, state, { view: viewOf(state), zoom: BIG[state.place] ? 1 : 1.7 });
     var mini = $('#sticky-preview');
     if (mini) { mini.style.background = garmentHex; mini.innerHTML = designSVG(state); }
   }
@@ -380,13 +394,15 @@
     if (scroll) {
       var el = $('#constructor');
       if (el) el.scrollIntoView({ behavior: reduceMotion() ? 'auto' : 'smooth', block: 'start' });
+      var h = $('#constructor-h');
+      if (h) h.focus({ preventScroll: true });
     }
   }
 
   // Нитка, що зливається з виробом, — підбираємо контрастну.
   function autoThread(product, color, thread) {
     var hex = colorOf(product, color).hex;
-    if (contrast(hex, THREADS[thread].hex) >= 2.5) return thread;
+    if (contrast(hex, THREADS[thread].hex) >= 3) return thread;
     return lum(hex) > 0.3 ? 'black' : 'white';
   }
 
@@ -406,7 +422,7 @@
         patch.thread = autoThread(t.value, patch.color, state.thread);
       }
       if (t.name === 'color') patch.thread = autoThread(state.product, t.value, state.thread);
-      if (t.name === 'type' && t.value === 'hogwarts') patch.thread = 'gold';
+      if (t.name === 'type' && t.value === 'hogwarts') patch.thread = autoThread(state.product, state.color, 'gold');
       setState(patch);
     });
     form.addEventListener('input', function (e) {
@@ -465,7 +481,7 @@
     }).join('');
     list.forEach(function (o) {
       var s = assign({}, DEFAULT, o.x.s);
-      renderGarment(grid.querySelector('[data-idea-preview="' + o.i + '"]'), s, { lazy: true, scale: BIG[s.place] ? 1 : 1.6 });
+      renderGarment(grid.querySelector('[data-idea-preview="' + o.i + '"]'), s, { lazy: true, zoom: BIG[s.place] ? 1 : 2 });
     });
     $$('#idea-filter [data-filter]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-filter') === ideaFilter)); });
   }
@@ -503,6 +519,7 @@
         ideaFilter = card.getAttribute('data-occasion');
         renderIdeas();
         $('#ideas').scrollIntoView({ behavior: reduceMotion() ? 'auto' : 'smooth', block: 'start' });
+        $('#ideas-h').focus({ preventScroll: true });
       });
     });
   }
@@ -582,7 +599,7 @@
         '<span class="cart-item__price">' + money(i.price * i.qty) + '</span></div>' +
         '<button type="button" class="link-btn" data-remove>Видалити</button></div></li>';
     }).join('');
-    cart.forEach(function (i) { renderGarment(list.querySelector('[data-thumb="' + i.key + '"]'), i); });
+    cart.forEach(function (i) { renderGarment(list.querySelector('[data-thumb="' + i.key + '"]'), i, { zoom: BIG[i.place] ? 1 : 2.2 }); });
     $('#cart-total').textContent = money(total());
     $('#checkout-total').textContent = money(total());
   }
