@@ -3,15 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Чарівна Нитка — іменні худі, світшоти й футболки у стилі Гаррі Поттера</title>
-<meta name="description" content="Іменний подарунок для фаната Гаррі Поттера: вишивка або принт ініціалів у гербі факультету, написів і емблем на худі, світшотах і футболках. Пакування з листівкою, оплата при отриманні.">
+<title>На подарунок — одяг з вашим написом, ініціалами чи датою</title>
+<meta name="description" content="Футболки, худі, світшоти, кепки й шопери з вишивкою або принтом: ініціали, дата, коротке слово, емблема чи герб Гоґвортсу. Макет до оплати, доставка Новою Поштою.">
 <meta name="theme-color" content="#FFFFFF">
-<link rel="preload" as="image" href="images/hoodie-bordo-front.webp" fetchpriority="high">
+<link rel="preload" as="image" href="images/g/hoodieover-black-front.webp" fetchpriority="high">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Lora:wght@400;500;600&family=Montserrat:wght@600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script src="garments.js" defer></script>
 <script src="app.js" defer></script>
 </head>
 <body>
@@ -19,14 +20,15 @@
 
 <header class="header">
   <div class="wrap header__in">
-    <a class="logo" href="#top" aria-label="Чарівна Нитка — на початок">
-      <svg viewBox="0 0 32 32" aria-hidden="true" width="28" height="28"><path d="M16 3l3.2 7 7.6.8-5.7 5.1 1.6 7.5L16 19.6l-6.7 3.8 1.6-7.5L5.2 10.8l7.6-.8z" fill="#C9A227"/><path d="M4 29c8-2 16-8 24-26" stroke="#7F0909" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
-      <span translate="no">Чарівна Нитка</span>
+    <a class="logo" href="#top" aria-label="На подарунок — на початок">
+      <svg viewBox="0 0 32 32" aria-hidden="true" width="28" height="28"><rect x="5" y="13" width="22" height="15" rx="2" fill="none" stroke="#7F0909" stroke-width="2"/><path d="M3 9h26v5H3zM16 9v19" fill="none" stroke="#7F0909" stroke-width="2"/><path d="M16 9c-2-5-8-6-8-2s6 2 8 2c2 0 8 2 8-2s-6-3-8 2z" fill="none" stroke="#C9A227" stroke-width="2"/></svg>
+      <span translate="no">На подарунок</span>
     </a>
     <nav class="nav" id="nav" aria-label="Головне меню">
+      <a href="#ideas">Ідеї</a>
       <a href="#constructor">Конструктор</a>
-      <a href="#designs">Готові дизайни</a>
-      <a href="#gift">Доставка й оплата</a>
+      <a href="#works">Наші роботи</a>
+      <a href="#gift">Доставка</a>
       <a href="#faq">Питання</a>
     </nav>
     <div class="header__actions">
@@ -46,87 +48,76 @@
 <section class="hero" id="top">
   <div class="wrap hero__in">
     <div class="hero__text">
-      <p class="eyebrow">Вишивка й принт на замовлення</p>
-      <h1>Іменний подарунок для фаната Гаррі Поттера</h1>
-      <p class="lead">Футболки, світшоти й худі з вишивкою або принтом у стилі світу Гаррі Поттера. Додайте імʼя, ініціали чи улюблену цитату — виготовимо за <span data-days>5–7</span> днів і загорнемо в подарункове пакування.</p>
+      <p class="eyebrow">Вишивка й принт на одязі</p>
+      <h1>Подарунок, зроблений для однієї людини</h1>
+      <p class="lead">Футболки, худі, світшоти, кепки й шопери. Вишиваємо чи друкуємо монограму, дату, коротке слово або невелику емблему. Перед виготовленням погоджуємо з вами макет. Готово за <span data-days>3–5</span> робочих днів.</p>
       <div class="hero__cta">
-        <a class="btn btn--primary" href="#constructor">Створити дизайн</a>
-        <a class="btn btn--ghost" href="#designs">Готові дизайни</a>
+        <a class="btn btn--primary" href="#constructor">Створити свій</a>
+        <a class="btn btn--ghost" href="#ideas">Готові ідеї</a>
       </div>
       <ul class="trust">
-        <li>Оплата при отриманні</li>
-        <li>Пакування з листівкою</li>
-        <li>Обмін розміру</li>
+        <li>Макет до оплати</li>
+        <li>Фото перед відправкою</li>
+        <li><span>Від <span data-base-price>540 ₴</span></span></li>
       </ul>
     </div>
     <figure class="hero__visual">
       <div class="hero__glow" aria-hidden="true"></div>
-      <div class="garment garment--hero" id="hero-garment"></div>
-      <button type="button" class="hero__pause" id="hero-pause" aria-pressed="false" aria-label="Зупинити зміну факультетів">
+      <button type="button" class="hero__pause" id="hero-pause" aria-pressed="false" aria-label="Зупинити показ прикладів">
         <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path class="i-pause" d="M8 5v14M16 5v14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path class="i-play" d="M8 5l11 7-11 7z" fill="currentColor"/></svg>
       </button>
-      <figcaption class="hero__tag"><span class="dot" aria-hidden="true"></span><span>Вишивка · герб <span id="hero-house">Ґрифіндор</span> · ініціали «ГП»</span></figcaption>
+      <div class="garment garment--hero" id="hero-garment"></div>
+      <figcaption class="hero__tag"><span class="dot" aria-hidden="true"></span><span id="hero-label">Вишивка «А + М» на худі оверсайз</span></figcaption>
     </figure>
   </div>
 </section>
 
-<section class="section houses" id="houses" aria-labelledby="houses-h">
+<section class="section occasions" aria-labelledby="occasions-h">
   <div class="wrap">
     <div class="section__head">
-      <h2 id="houses-h">Оберіть факультет</h2>
-      <p>Для кожного є свій герб. Для кого подарунок?</p>
+      <h2 id="occasions-h">Кому даруєте?</h2>
+      <p>Оберіть привід — покажемо готові ідеї. Будь-яку можна змінити під себе.</p>
     </div>
-    <div class="houses__grid">
-      <button type="button" class="house house--gryffindor" data-house="gryffindor">
-        <span class="house__crest" aria-hidden="true"></span>
-        <span class="house__name">Ґрифіндор</span>
-        <span class="house__desc">Для сміливих і запальних, які першими кидаються на допомогу.</span>
-        <span class="house__cta">Створити з цим гербом →</span>
-      </button>
-      <button type="button" class="house house--slytherin" data-house="slytherin">
-        <span class="house__crest" aria-hidden="true"></span>
-        <span class="house__name">Слизерин</span>
-        <span class="house__desc">Для амбітних і кмітливих, які завжди досягають свого.</span>
-        <span class="house__cta">Створити з цим гербом →</span>
-      </button>
-      <button type="button" class="house house--ravenclaw" data-house="ravenclaw">
-        <span class="house__crest" aria-hidden="true"></span>
-        <span class="house__name">Рейвенклов</span>
-        <span class="house__desc">Для допитливих, які прочитали вже всю домашню бібліотеку.</span>
-        <span class="house__cta">Створити з цим гербом →</span>
-      </button>
-      <button type="button" class="house house--hufflepuff" data-house="hufflepuff">
-        <span class="house__crest" aria-hidden="true"></span>
-        <span class="house__name">Гафелпаф</span>
-        <span class="house__desc">Для вірних і добрих, на яких завжди можна покластися.</span>
-        <span class="house__cta">Створити з цим гербом →</span>
-      </button>
+    <div class="occasions__grid">
+      <button type="button" class="occasion" data-occasion="love"><span class="occasion__icon" data-motif="heart"></span><span class="occasion__name">Коханим</span><span class="occasion__desc">Ініціали двох, дата знайомства, координати важливого місця.</span></button>
+      <button type="button" class="occasion" data-occasion="colleagues"><span class="occasion__icon" data-motif="coffee"></span><span class="occasion__name">Колегам</span><span class="occasion__desc">Стримано й доречно: місто, ініціали, маленька емблема.</span></button>
+      <button type="button" class="occasion" data-occasion="newyear"><span class="occasion__icon" data-motif="snowflake"></span><span class="occasion__name">На Новий рік</span><span class="occasion__desc">Рік на рукаві, сніжинка, однакові худі для всієї родини.</span></button>
+      <button type="button" class="occasion" data-occasion="xmas"><span class="occasion__icon" data-motif="tree"></span><span class="occasion__name">На Різдво</span><span class="occasion__desc">Тепле худі чи світшот з ялинкою або зіркою.</span></button>
+      <button type="button" class="occasion" data-occasion="hobby"><span class="occasion__icon" data-motif="note"></span><span class="occasion__name">Фанатам і хобі</span><span class="occasion__desc">Герб Гоґвортсу, біг, музика, кава.</span></button>
     </div>
-    <p class="note">Не знаєте факультет? Оберіть <a href="#constructor" data-emblem-link>емблему школи чарівництва</a> — вона підійде будь-кому.</p>
   </div>
 </section>
 
-<section class="section section--alt builder-sec" id="constructor" aria-labelledby="constructor-h">
+<section class="section section--alt" id="ideas" aria-labelledby="ideas-h">
   <div class="wrap">
     <div class="section__head">
-      <h2 id="constructor-h">Створіть свій дизайн</h2>
-      <p>Три кроки — і ви бачите, як виглядатиме подарунок. Ціна оновлюється одразу.</p>
+      <h2 id="ideas-h">Готові ідеї</h2>
+      <p>Натисніть «Персоналізувати» — ідея відкриється в конструкторі, і ви заміните текст, колір чи виріб.</p>
+    </div>
+    <div class="filters" id="idea-filter" role="group" aria-label="Привід"></div>
+    <div class="designs__grid" id="ideas-grid"></div>
+    <div class="more"><button type="button" class="btn btn--ghost" id="ideas-more" hidden>Показати всі ідеї</button></div>
+  </div>
+</section>
+
+<section class="section builder-sec" id="constructor" aria-labelledby="constructor-h">
+  <div class="wrap">
+    <div class="section__head">
+      <h2 id="constructor-h">Створіть свій подарунок</h2>
+      <p>Три кроки — і ви бачите, як він виглядатиме. Ціна оновлюється одразу.</p>
     </div>
 
     <form class="builder" id="builder" novalidate>
       <div class="builder__preview">
         <div class="preview-card">
           <div class="garment garment--preview" id="preview" aria-live="polite"></div>
-          <div class="preview-card__sides" role="group" aria-label="Сторона виробу">
-            <button type="button" class="seg" data-side="front" aria-pressed="true">Спереду</button>
-            <button type="button" class="seg" data-side="back" aria-pressed="false">Ззаду</button>
-          </div>
+          <div class="preview-card__sides" id="preview-sides" role="group" aria-label="Вигляд виробу"></div>
         </div>
       </div>
 
       <div class="builder__steps">
         <fieldset class="step">
-          <legend><span class="step__n" aria-hidden="true">1</span>Виріб — модель, колір і розмір</legend>
+          <legend><span class="step__n" aria-hidden="true">1</span>Виріб, колір і розмір</legend>
           <div class="field">
             <span class="field__label" id="l-product">Виріб</span>
             <div class="chips" id="f-product" role="radiogroup" aria-labelledby="l-product"></div>
@@ -135,7 +126,7 @@
             <span class="field__label" id="l-color">Колір: <b id="color-name"></b></span>
             <div class="swatches" id="f-color" role="radiogroup" aria-labelledby="l-color"></div>
           </div>
-          <div class="field">
+          <div class="field" id="size-field">
             <span class="field__label" id="l-size">Розмір</span>
             <div class="chips chips--size" id="f-size" role="radiogroup" aria-labelledby="l-size"></div>
             <p class="hint">Не впевнені з розміром? Виміряйте улюблену річ того, кому даруєте, і <a href="#faq-size">порівняйте з таблицею</a>.</p>
@@ -143,31 +134,31 @@
         </fieldset>
 
         <fieldset class="step">
-          <legend><span class="step__n" aria-hidden="true">2</span>Дизайн — герб, напис чи емблема</legend>
+          <legend><span class="step__n" aria-hidden="true">2</span>Що наносимо</legend>
           <div class="field">
-            <span class="field__label" id="l-type">Що наносимо</span>
+            <span class="field__label" id="l-type">Тип</span>
             <div class="chips" id="f-type" role="radiogroup" aria-labelledby="l-type"></div>
           </div>
 
-          <div data-for-type="crest">
+          <div data-for-type="initials">
             <div class="field">
-              <span class="field__label" id="l-house">Факультет</span>
-              <div class="chips" id="f-house" role="radiogroup" aria-labelledby="l-house"></div>
+              <label class="field__label" for="f-initials">Ініціали (до 7 знаків, можна «+» і крапки)</label>
+              <input class="input input--initials" id="f-initials" name="initials" type="text" maxlength="7" autocomplete="off" spellcheck="false" placeholder="А + М…" aria-describedby="initials-error">
+              <p class="field__msg" id="initials-error" role="alert" hidden></p>
             </div>
             <div class="field">
-              <label class="field__label" for="f-initials">Ініціали (до 3 літер)</label>
-              <input class="input input--initials" id="f-initials" name="initials" type="text" maxlength="3" autocomplete="off" spellcheck="false" placeholder="ГП…" aria-describedby="initials-error">
-              <p class="field__msg" id="initials-error" role="alert" hidden></p>
+              <span class="field__label" id="l-istyle">Стиль</span>
+              <div class="chips" id="f-istyle" role="radiogroup" aria-labelledby="l-istyle"></div>
             </div>
           </div>
 
           <div data-for-type="text" hidden>
             <div class="field">
               <label class="field__label" for="f-text">Текст (до 3 рядків)</label>
-              <textarea class="input" id="f-text" name="text" rows="3" maxlength="90" placeholder="напр. «Завжди»…" aria-describedby="text-error text-long text-hint"></textarea>
+              <textarea class="input" id="f-text" name="text" rows="3" maxlength="60" placeholder="напр. est. 2019…" aria-describedby="text-error text-long text-hint"></textarea>
               <p class="field__msg" id="text-error" role="alert" hidden></p>
               <p class="hint" id="text-hint">Перевірте написання — виріб виготовляємо саме з цим текстом.</p>
-              <p class="hint hint--warn" id="text-long" hidden>Для грудей ліворуч і рукава радимо до 14 символів у рядку — інакше літери будуть дрібні. Розбийте текст на рядки або оберіть «Груди по центру» чи «Спина».</p>
+              <p class="hint hint--warn" id="text-long" hidden>Для малих місць радимо до 14 символів у рядку — інакше літери будуть дрібні. Розбийте текст на рядки або оберіть «Груди по центру» чи «Спина».</p>
             </div>
             <div class="field">
               <span class="field__label" id="l-font">Шрифт</span>
@@ -180,23 +171,27 @@
               <span class="field__label" id="l-motif">Емблема</span>
               <div class="chips" id="f-motif" role="radiogroup" aria-labelledby="l-motif"></div>
             </div>
+          </div>
+
+          <div data-for-type="emblem hogwarts" hidden>
             <div class="field">
-              <label class="field__label" for="f-caption">Підпис під емблемою (необовʼязково)</label>
-              <input class="input" id="f-caption" name="caption" type="text" maxlength="28" autocomplete="off" placeholder="напр. імʼя або рік…">
+              <label class="field__label" for="f-caption" id="caption-label">Підпис (необовʼязково)</label>
+              <input class="input" id="f-caption" name="caption" type="text" maxlength="20" autocomplete="off" placeholder="напр. ініціали або рік…">
             </div>
           </div>
         </fieldset>
 
         <fieldset class="step">
-          <legend><span class="step__n" aria-hidden="true">3</span>Деталі — техніка, колір і місце</legend>
+          <legend><span class="step__n" aria-hidden="true">3</span>Техніка, колір і місце</legend>
           <div class="field">
             <span class="field__label" id="l-tech">Техніка</span>
             <div class="chips" id="f-tech" role="radiogroup" aria-labelledby="l-tech"></div>
-            <p class="hint">Вишивка — обʼємна й преміальна. Принт — яскравий і з дрібними деталями.</p>
+            <p class="hint">Вишивка — обʼємна й довговічна, найкраще для коротких написів і ініціалів. Принт — точніше передає дрібні деталі й великі зображення.</p>
           </div>
-          <div class="field">
+          <div class="field" data-for-type="text initials emblem">
             <span class="field__label" id="l-thread"><span id="thread-label">Колір нитки</span>: <b id="thread-name"></b></span>
             <div class="swatches" id="f-thread" role="radiogroup" aria-labelledby="l-thread"></div>
+            <p class="hint hint--warn" id="thread-warn" hidden>Цей колір майже зливається з виробом — оберіть контрастніший.</p>
           </div>
           <div class="field">
             <span class="field__label" id="l-place">Розташування</span>
@@ -207,7 +202,7 @@
         <div class="buy">
           <div>
             <div class="buy__price" id="price" aria-live="polite"></div>
-            <p class="buy__note">Виготовлення — <span data-days>5–7</span> днів, потім відправка Новою Поштою.</p>
+            <p class="buy__note">Виготовлення — <span data-days>3–5</span> робочих днів після погодження макета.</p>
           </div>
           <button class="btn btn--primary btn--lg" id="add-btn" type="submit">Додати в кошик</button>
           <p class="buy__error" id="personal-error" hidden></p>
@@ -218,122 +213,92 @@
   </div>
 </section>
 
-<section class="section" id="designs" aria-labelledby="designs-h">
+<section class="section section--alt" id="works" aria-labelledby="works-h">
   <div class="wrap">
     <div class="section__head">
-      <h2 id="designs-h">Готові дизайни</h2>
-      <p>Оберіть дизайн і додайте своє імʼя чи ініціали.</p>
+      <h2 id="works-h">Як це виглядає наживо</h2>
+      <p>Справжні фото готових кепок, худі й футболок із виробництва Loomiq — так ваш подарунок виглядатиме в руках.</p>
     </div>
-    <div class="designs__grid" id="designs-grid"></div>
-  </div>
-</section>
-
-<section class="section section--alt" id="compare" aria-labelledby="compare-h">
-  <div class="wrap">
-    <div class="section__head">
-      <h2 id="compare-h">Принт чи вишивка?</h2>
-      <p>Обидва варіанти служать довго. Різниця — у вигляді та призначенні.</p>
-    </div>
-    <div class="compare">
-      <article class="compare__card">
-        <h3>Вишивка</h3>
-        <dl>
-          <dt>Вигляд</dt><dd>Обʼємна, з фактурою ниток, виглядає дорого</dd>
-          <dt>Для чого краще</dt><dd>Ініціали, герби, невеликі емблеми на грудях</dd>
-          <dt>Ціна нанесення</dt><dd>від 250 ₴</dd>
-        </dl>
-      </article>
-      <article class="compare__card">
-        <h3>Принт</h3>
-        <dl>
-          <dt>Вигляд</dt><dd>Рівний, яскравий, передає дрібні деталі</dd>
-          <dt>Для чого краще</dt><dd>Великі зображення, довгі цитати, дизайн на спині</dd>
-          <dt>Ціна нанесення</dt><dd>від 150 ₴</dd>
-        </dl>
-      </article>
+    <div class="works">
+      <img src="images/works/work-37.webp" alt="Кепки з вишитим написом «CREATOR»" width="480" height="600" loading="lazy" decoding="async">
+      <img src="images/works/work-35.webp" alt="Синя кепка з вишитим написом «EARTH CHILD»" width="480" height="600" loading="lazy" decoding="async">
+      <img src="images/works/work-26.webp" alt="Худі з рукописним принтом на спині" width="480" height="600" loading="lazy" decoding="async">
+      <img src="images/works/work-38.webp" alt="Чорна кепка з вишивкою «aesthetic»" width="480" height="600" loading="lazy" decoding="async">
+      <img src="images/works/work-31.webp" alt="Чорна й біла футболки з вишитим написом" width="480" height="600" loading="lazy" decoding="async">
+      <img src="images/works/work-42.webp" alt="Фіолетова кепка з рукописною вишивкою" width="480" height="600" loading="lazy" decoding="async">
+      <img src="images/works/work-21.webp" alt="Кепки з вишитою монограмою" width="480" height="600" loading="lazy" decoding="async">
+      <img src="images/works/work-49.webp" alt="Кепки різних кольорів з вишитими написами" width="480" height="600" loading="lazy" decoding="async">
     </div>
   </div>
 </section>
 
-<section class="section gift" id="gift" aria-labelledby="gift-h">
+<section class="section" id="quality" aria-labelledby="quality-h">
+  <div class="wrap">
+    <div class="section__head"><h2 id="quality-h">Як ми контролюємо якість</h2></div>
+    <ol class="how">
+      <li><span class="how__n" aria-hidden="true">1</span><h3>Спершу макет</h3><p>Показуємо, як виглядатиме напис, і беремося до роботи лише після вашого «так».</p></li>
+      <li><span class="how__n" aria-hidden="true">2</span><h3>Фото перед відправкою</h3><p>Знімаємо готовий виріб і надсилаємо вам, перш ніж передати на Нову Пошту.</p></li>
+      <li><span class="how__n" aria-hidden="true">3</span><h3>Помилка з нашого боку — переробимо</h3><p>Якщо виріб не відповідає макету або має брак, безкоштовно виправимо чи повернемо гроші.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section section--alt gift" id="gift" aria-labelledby="gift-h">
   <div class="wrap gift__in">
     <div class="gift__scene" aria-hidden="true">
       <div class="garment gift__garment" id="gift-garment"></div>
       <div class="gift__card">
-        <p class="gift__card-to">Для Софійки</p>
-        <p class="gift__card-text">З днем народження! Нехай кожен день буде трохи чарівним ✦</p>
+        <p class="gift__card-to">Для Олі</p>
+        <p class="gift__card-text">З Різдвом! Нехай у домі буде тепло.</p>
       </div>
     </div>
     <div>
       <h2 id="gift-h">Подарунок, готовий до вручення</h2>
-      <p class="lead">Вам не треба нічого пакувати й нічого підписувати.</p>
+      <p class="lead">Пакуємо й підписуємо за вас.</p>
       <ul class="perks">
-        <li><strong>Подарункове пакування з листівкою</strong>Напишіть побажання — ми впишемо його в листівку й вкладемо в коробку.</li>
-        <li><strong>Виготовлення за <span data-days>5–7</span> днів</strong>Встигнете до дня народження, якщо замовите заздалегідь.</li>
-        <li><strong>Обмін розміру</strong>Не підійшов розмір? Обміняємо.</li>
-        <li><strong>Оплата при отриманні</strong>Оплатіть, коли переконаєтеся, що все гаразд. Доставка Новою Поштою по всій Україні.</li>
+        <li><strong>Подарункове пакування з листівкою</strong>Напишіть побажання під час оформлення — впишемо його в листівку.</li>
+        <li><strong>Виготовлення за <span data-days>3–5</span> робочих днів</strong>До Нового року й Різдва замовляйте заздалегідь.</li>
+        <li><strong>Доставка Новою Поштою</strong>По всій Україні, за тарифами перевізника.</li>
+        <li><strong>Оплата при отриманні або на карту</strong>Як вам зручніше.</li>
       </ul>
       <a class="btn btn--primary" href="#constructor">Створити подарунок</a>
     </div>
   </div>
 </section>
 
-<section class="section section--alt" id="how" aria-labelledby="how-h">
-  <div class="wrap">
-    <div class="section__head"><h2 id="how-h">Як замовити</h2></div>
-    <ol class="how">
-      <li><span class="how__n" aria-hidden="true">1</span><h3>Створіть дизайн</h3><p>У конструкторі або на основі готового.</p></li>
-      <li><span class="how__n" aria-hidden="true">2</span><h3>Оформіть замовлення</h3><p>Вкажіть місто й відділення Нової Пошти.</p></li>
-      <li><span class="how__n" aria-hidden="true">3</span><h3>Отримайте подарунок</h3><p>За <span data-days>5–7</span> днів, у пакуванні з листівкою.</p></li>
-    </ol>
-  </div>
-</section>
-
-<section class="section" id="reviews" aria-labelledby="reviews-h">
-  <div class="wrap">
-    <div class="section__head"><h2 id="reviews-h">Що кажуть ті, хто вже дарував</h2></div>
-    <!-- ЗАГЛУШКА: приклади відгуків. Перед публікацією замінити реальними. -->
-    <div class="reviews">
-      <blockquote class="review"><p>«Замовила синові худі з гербом Рейвенклову та його ініціалами. Не знімає вже тиждень. Вишивка акуратна, жодної нитки не стирчить».</p><footer>[Імʼя], [місто]</footer></blockquote>
-      <blockquote class="review"><p>«Подарувала хлопцеві футболку з написом “Завжди” — він зрозумів усе без слів. Листівка в коробці — окреме дякую».</p><footer>[Імʼя], [місто]</footer></blockquote>
-      <blockquote class="review"><p>«Сумнівалася з розміром, але менеджер допоміг підібрати за таблицею. Сів ідеально».</p><footer>[Імʼя], [місто]</footer></blockquote>
-      <blockquote class="review"><p>«Брали подрузі світшот “Платформа 9¾” на день народження. Встигли вчасно, пакування дуже гарне».</p><footer>[Імʼя], [місто]</footer></blockquote>
-    </div>
-  </div>
-</section>
-
-<section class="section section--alt" id="faq" aria-labelledby="faq-h">
+<section class="section" id="faq" aria-labelledby="faq-h">
   <div class="wrap wrap--narrow">
     <div class="section__head"><h2 id="faq-h">Часті питання</h2></div>
     <div class="faq">
-      <details id="faq-size"><summary>Як обрати розмір, якщо це сюрприз?</summary>
-        <p>Виміряйте річ, яку людина часто носить, і порівняйте з таблицею. Якщо сумніваєтеся, напишіть нам — допоможемо підібрати. Не підійшов розмір — обміняємо.</p>
+      <details id="faq-size"><summary>Не знаю розміру — як вгадати, щоб був сюрприз?</summary>
+        <p>Виміряйте річ, яку людина часто носить, і порівняйте з таблицею. Оверсайз сидить вільніше, тож беріть звичний розмір. Якщо сумніваєтесь, напишіть нам зріст і статуру — підкажемо. Кепки регулюються ззаду, шопер — без розміру.</p>
         <div class="table-wrap"><table class="sizes">
-          <caption>Ширина виробу під пахвами, см [уточнити]</caption>
+          <caption>Ширина виробу під пахвами, см [уточнити за Loomiq]</caption>
           <thead><tr><th scope="col">Розмір</th><th scope="col">XS</th><th scope="col">S</th><th scope="col">M</th><th scope="col">L</th><th scope="col">XL</th><th scope="col">XXL</th></tr></thead>
           <tbody>
-            <tr><th scope="row">Футболка</th><td>48</td><td>51</td><td>54</td><td>57</td><td>60</td><td>63</td></tr>
+            <tr><th scope="row">Футболка базова</th><td>48</td><td>51</td><td>54</td><td>57</td><td>60</td><td>63</td></tr>
+            <tr><th scope="row">Футболка оверсайз</th><td>54</td><td>57</td><td>60</td><td>63</td><td>66</td><td>69</td></tr>
             <tr><th scope="row">Світшот</th><td>52</td><td>55</td><td>58</td><td>61</td><td>64</td><td>67</td></tr>
-            <tr><th scope="row">Худі</th><td>54</td><td>57</td><td>60</td><td>63</td><td>66</td><td>69</td></tr>
+            <tr><th scope="row">Худі</th><td>56</td><td>59</td><td>62</td><td>65</td><td>68</td><td>71</td></tr>
           </tbody>
         </table></div>
       </details>
-      <details><summary>Як доглядати за вишивкою і принтом?</summary><p>Періть виріб вивернутим навиворіт при 30 °C, не відбілюйте, прасуйте з виворітного боку.</p></details>
-      <details><summary>Скільки часу займає виготовлення?</summary><p><span data-days>5–7</span> днів від підтвердження замовлення, потім доставка Новою Поштою — зазвичай 1–3 дні.</p></details>
-      <details><summary>Як можна оплатити?</summary><p>Накладеним платежем при отриманні або передоплатою на карту — реквізити надішле менеджер.</p></details>
-      <details><summary>Як відбувається доставка?</summary><p>Відправляємо Новою Поштою на відділення по всій Україні. Вартість доставки — за тарифами перевізника.</p></details>
-      <details><summary>Чи можна обміняти або повернути персоналізований виріб?</summary><p>Розмір обміняємо. Виріб з імʼям чи ініціалами шиється саме для вас, тому повернення можливе лише у разі браку.</p></details>
+      <details><summary>Встигнете до свята?</summary><p>Виготовлення — <span data-days>3–5</span> робочих днів після погодження макета, доставка Новою Поштою — зазвичай 1–3 дні. До Нового року й Різдва радимо замовляти щонайменше за два тижні.</p></details>
+      <details><summary>Як прати, щоб напис не зіпсувався?</summary><p>До 40 °C, навиворіт, без відбілювача, не прасувати по нанесенню.</p></details>
+      <details><summary>Як оплатити?</summary><p>Накладеним платежем при отриманні або передоплатою на карту — реквізити надішле менеджер. Доставка — за тарифами Нової Пошти.</p></details>
+      <details><summary>Чи можна обміняти персоналізований виріб?</summary><p>Кожен виріб шиємо під конкретне замовлення, тому обміну через «не підійшов розмір чи колір» немає. Якщо виріб не відповідає макету, має брак або ми переплутали розмір — переробимо чи повернемо гроші. Напишіть нам протягом 14 днів і додайте фото.</p></details>
+      <details><summary>Можна свій дизайн або фото?</summary><p>Так. Надішліть напис, ескіз чи зображення в коментарі до замовлення або в Telegram — покажемо макет до оплати. Фото краще друкувати принтом, для вишивки підходять прості контури й короткий текст.</p></details>
     </div>
   </div>
 </section>
 
 <section class="final" aria-labelledby="final-h">
   <div class="wrap final__in">
-    <h2 id="final-h">Подаруйте трохи магії</h2>
-    <p>Іменна вишивка або принт, пакування з листівкою й оплата при отриманні. Готово за <span data-days>5–7</span> днів.</p>
+    <h2 id="final-h">Залишилось обрати, що вишити</h2>
+    <p>Оберіть виріб, впишіть ініціали чи дату й побачите результат одразу. Макет погодимо до оплати.</p>
     <div class="hero__cta">
-      <a class="btn btn--gold" href="#constructor">Створити дизайн</a>
-      <a class="btn btn--ghost-light" href="#designs">Готові дизайни</a>
+      <a class="btn btn--gold" href="#constructor">Створити свій</a>
+      <a class="btn btn--ghost-light" href="#ideas">Готові ідеї</a>
     </div>
   </div>
 </section>
@@ -343,16 +308,16 @@
 <footer class="footer">
   <div class="wrap footer__in">
     <div>
-      <p class="logo logo--footer" translate="no">Чарівна Нитка</p>
-      <p>Іменні футболки, світшоти й худі з вишивкою та принтом у стилі світу Гаррі Поттера. Шиємо подарунки для фанатів по всій Україні.</p>
+      <p class="logo logo--footer" translate="no">На подарунок</p>
+      <p>Одяг і аксесуари з вашим написом, ініціалами чи датою. Вишивка й принт від виробника Loomiq, доставка по Україні.</p>
     </div>
     <ul class="footer__links">
       <li><a href="#faq-size">Таблиця розмірів</a></li>
       <li><a href="#gift">Доставка й оплата</a></li>
       <li><a href="#faq">Обмін і повернення</a></li>
-      <li><a href="#" data-tg>Telegram</a></li>
+      <li><a href="#" data-tg target="_blank" rel="noopener">Telegram</a></li>
     </ul>
-    <p class="footer__legal">«Чарівна Нитка» — неофіційна фан-продукція. Ми не повʼязані з авторкою, видавцями чи правовласниками всесвіту «Гаррі Поттер» і не маємо від них ліцензії. Усі права на світ, персонажів і назви належать їхнім правовласникам. © <span id="year">2026</span> Чарівна Нитка</p>
+    <p class="footer__legal">Колекція «Гаррі Поттер» — неофіційна фан-продукція, магазин не повʼязаний із правовласниками. Назви, герби й символи світу Гаррі Поттера належать їхнім правовласникам. © <span id="year">2026</span> На подарунок</p>
   </div>
 </footer>
 
@@ -377,8 +342,8 @@
 
     <div class="drawer__body" data-step="cart">
       <div class="cart-empty" id="cart-empty">
-        <p>Тут поки порожньо. Створіть дизайн або оберіть готовий — і подарунок зʼявиться тут.</p>
-        <a class="btn btn--primary" href="#constructor" data-close-cart>Створити дизайн</a>
+        <p>Тут поки порожньо. Створіть дизайн або оберіть готову ідею — і подарунок зʼявиться тут.</p>
+        <a class="btn btn--primary" href="#ideas" data-close-cart>Готові ідеї</a>
       </div>
       <ul class="cart-list" id="cart-list"></ul>
       <div class="cart-foot" id="cart-foot" hidden>
@@ -399,7 +364,7 @@
         <label class="radio"><input type="radio" name="pay" value="card"><span>Передоплата на карту — реквізити надішле менеджер</span></label>
       </fieldset>
       <label class="radio"><input type="checkbox" id="c-gift" name="gift"><span>Це подарунок — додати листівку</span></label>
-      <div class="field" id="gift-text-wrap" hidden><label class="field__label" for="c-gift-text">Текст листівки</label><textarea class="input" id="c-gift-text" name="giftText" rows="3" autocomplete="off" maxlength="200" placeholder="Напишіть побажання — ми впишемо його в листівку…"></textarea></div>
+      <div class="field" id="gift-text-wrap" hidden><label class="field__label" for="c-gift-text">Текст листівки</label><textarea class="input" id="c-gift-text" name="giftText" rows="3" maxlength="200" autocomplete="off" placeholder="Напишіть побажання — ми впишемо його в листівку…"></textarea></div>
       <div class="field"><label class="field__label" for="c-comment">Коментар до замовлення</label><textarea class="input" id="c-comment" name="comment" rows="2" autocomplete="off" placeholder="Побажання щодо дизайну, термінів тощо…"></textarea></div>
       <div class="cart-total"><span>Разом</span><strong id="checkout-total"></strong></div>
       <button type="submit" class="btn btn--primary btn--block">Підтвердити замовлення</button>
