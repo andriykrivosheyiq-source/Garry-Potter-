@@ -49,7 +49,15 @@
   var PLACES = { chest: 'Груди ліворуч', center: 'Груди по центру', back: 'Спина', sleeve: 'Рукав', capfront: 'Спереду', capside: 'Збоку', tote: 'По центру' };
   var BIG = { center: 1, back: 2 };
   var TECH = { embroidery: 'Вишивка', print: 'Принт' };
-  var TYPES = { text: 'Напис', initials: 'Ініціали', emblem: 'Емблема', hogwarts: 'Герб Гоґвортсу' };
+  var TYPES = { text: 'Напис', initials: 'Ініціали', emblem: 'Емблема', hogwarts: 'Герб' };
+  // Герби: файл у images/crest/, пропорція висота/ширина.
+  var CRESTS = {
+    hogwarts: { name: 'Гоґвортс', h: 1.172 },
+    gryffindor: { name: 'Ґрифіндор', h: 1.263 },
+    slytherin: { name: 'Слизерин', h: 1.167 },
+    hufflepuff: { name: 'Гафелпаф', h: 1.229 },
+    ravenclaw: { name: 'Рейвенклов', h: 1.220 }
+  };
 
   var FONTS = {
     classic: { name: 'Класичний', css: "'Cormorant Garamond', Georgia, serif", weight: 700, k: 0.5 },
@@ -93,7 +101,8 @@
     { o: 'xmas', title: 'Ялинка й дата', desc: 'Маленька ялинка, під нею дата свята.', s: { product: 'sweat', color: 'bordo', tech: 'embroidery', place: 'chest', type: 'emblem', motif: 'tree', caption: '25.12', thread: 'gold' } },
     { o: 'xmas', title: 'Зірка на рукаві', desc: 'Одна золота зірка на рукаві.', s: { product: 'hoodiezip', color: 'navy', tech: 'embroidery', place: 'sleeve', type: 'emblem', motif: 'star', caption: '', thread: 'gold' } },
     { o: 'xmas', title: 'Вдома', desc: 'Тонка гірлянда й одне слово під нею.', s: { product: 'tote', color: 'beige', tech: 'print', place: 'tote', type: 'emblem', motif: 'garland', caption: 'вдома', thread: 'black' } },
-    { o: 'hobby', title: 'Гоґвортс з ініціалами', desc: 'Герб Гоґвортсу на грудях, під ним ініціали.', s: { product: 'hoodieover', color: 'black', tech: 'embroidery', place: 'chest', type: 'hogwarts', caption: 'А.М.', thread: 'gold' } },
+    { o: 'hobby', title: 'Герб факультету', desc: 'Герб Ґрифіндору на грудях, під ним ініціали. Можна обрати будь-який факультет.', s: { product: 'hoodieover', color: 'fume', tech: 'embroidery', place: 'chest', type: 'hogwarts', crest: 'gryffindor', caption: 'А.М.', thread: 'white' } },
+    { o: 'hobby', title: 'Слизерин', desc: 'Герб Слизерину на грудях — для амбітних.', s: { product: 'sweat', color: 'black', tech: 'embroidery', place: 'chest', type: 'hogwarts', crest: 'slytherin', caption: '', thread: 'silver' } },
     { o: 'hobby', title: 'Гоґвортс на спині', desc: 'Великий герб Гоґвортсу на спині, спереду чисто.', s: { product: 'teeover', color: 'slate', tech: 'print', place: 'back', type: 'hogwarts', caption: '', thread: 'gold' } },
     { o: 'hobby', title: 'Гори', desc: 'Невеликі гори й назва хребта на грудях — для тих, хто ходить у походи.', s: { product: 'sweat', color: 'khaki', tech: 'embroidery', place: 'chest', type: 'emblem', motif: 'mountains', caption: 'Карпати', thread: 'white' } },
     { o: 'hobby', title: 'Дистанція', desc: 'Кросівок і довжина марафону збоку кепки.', s: { product: 'cap', color: 'cream', tech: 'embroidery', place: 'capside', type: 'emblem', motif: 'sneaker', caption: '42.195', thread: 'black' } },
@@ -101,7 +110,7 @@
   ];
 
   var DEFAULT = { product: 'hoodieover', color: 'black', tech: 'embroidery', place: 'chest', type: 'initials', initials: 'А + М', istyle: 'plain',
-    text: 'est. 2019', font: 'classic', motif: 'heart', caption: '', thread: 'white', size: 'M' };
+    text: 'est. 2019', font: 'classic', motif: 'heart', crest: 'hogwarts', caption: '', thread: 'white', size: 'M' };
 
   /* ---------- Утиліти ---------- */
   function $(s, r) { return (r || document).querySelector(s); }
@@ -227,13 +236,14 @@
   }
 
   function hogwartsSVG(s, id) {
+    var cr = CRESTS[s.crest] || CRESTS.hogwarts;
     var t = THREADS[s.thread] || THREADS.gold;
     var cap = (s.caption || '').trim().slice(0, 20);
-    var H = cap ? 280 : 234;
+    var ih = Math.round(200 * cr.h), H = cap ? ih + 46 : ih;
     var c = paint(id, t.hex, s.tech);
-    return '<svg viewBox="0 0 200 ' + H + '" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Герб Гоґвортсу' + (cap ? ', ' + esc(cap) : '') + '">' + defs(id, t.hex, s.tech) +
-      '<image href="images/crest/hogwarts.webp" x="0" y="0" width="200" height="234"' + (s.tech === 'embroidery' ? ' filter="url(#sh' + id + ')"' : '') + '/>' +
-      (cap ? '<g' + fx(id, s.tech) + '>' + captionText(cap, 270, c) + '</g>' : '') + '</svg>';
+    return '<svg viewBox="0 0 200 ' + H + '" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Герб ' + esc(cr.name) + (cap ? ', ' + esc(cap) : '') + '">' + defs(id, t.hex, s.tech) +
+      '<image href="images/crest/' + (CRESTS[s.crest] ? s.crest : 'hogwarts') + '.webp" x="0" y="0" width="200" height="' + ih + '"' + (s.tech === 'embroidery' ? ' filter="url(#sh' + id + ')"' : '') + '/>' +
+      (cap ? '<g' + fx(id, s.tech) + '>' + captionText(cap, ih + 36, c) + '</g>' : '') + '</svg>';
   }
 
   function designSVG(s) {
@@ -284,7 +294,7 @@
   function whatOf(s) {
     if (s.type === 'text') return 'напис «' + String(s.text || '').replace(/\n/g, ' / ') + '», шрифт ' + FONTS[s.font].name.toLowerCase();
     if (s.type === 'initials') return 'ініціали «' + (s.initials || '') + '», ' + INITIAL_STYLES[s.istyle].toLowerCase();
-    if (s.type === 'hogwarts') return 'герб Гоґвортсу (повноколірний)' + (s.caption ? ', підпис «' + s.caption + '»' : '');
+    if (s.type === 'hogwarts') return 'герб «' + (CRESTS[s.crest] || CRESTS.hogwarts).name + '» (повноколірний)' + (s.caption ? ', підпис «' + s.caption + '»' : '');
     return 'емблема «' + MOTIFS[s.motif] + '»' + (s.caption ? ', підпис «' + s.caption + '»' : '');
   }
   function describe(s) {
@@ -325,6 +335,9 @@
       chips($('#f-font'), Object.keys(FONTS).reduce(function (o, k) { o[k] = FONTS[k].name; return o; }, {}), 'font');
       chips($('#f-istyle'), INITIAL_STYLES, 'istyle');
       chips($('#f-motif'), MOTIFS, 'motif');
+      $('#f-crest').innerHTML = Object.keys(CRESTS).map(function (k) {
+        return '<label class="crest-opt"><input type="radio" name="crest" value="' + k + '"><span><img src="images/crest/' + k + '.webp" alt="" width="40" height="48"><b>' + esc(CRESTS[k].name) + '</b></span></label>';
+      }).join('');
       swatches($('#f-thread'), Object.keys(THREADS).map(function (k) { return { id: k, name: THREADS[k].name, hex: THREADS[k].hex }; }), 'thread', 'Колір нанесення: ');
     }
     if (renderedProduct !== state.product) {
@@ -333,7 +346,7 @@
       chips($('#f-place'), pl, 'place');
       renderedProduct = state.product;
     }
-    ['product', 'tech', 'type', 'place', 'size', 'font', 'istyle', 'motif', 'thread', 'color'].forEach(function (n) { setChecked(n, state[n]); });
+    ['product', 'tech', 'type', 'place', 'size', 'font', 'istyle', 'motif', 'crest', 'thread', 'color'].forEach(function (n) { setChecked(n, state[n]); });
 
     $('#size-field').hidden = !P.sizes;
     $('#f-initials').value = state.initials || '';
@@ -581,108 +594,19 @@
   }
 
 
-  /* ---------- Перший екран: живий напис на худі ---------- */
-  var HL_EXAMPLES = ['А + М', 'est. 2019', 'Оля', 'київ', '14.02'];
-  var HL_COLORS = ['black', 'white', 'brown', 'gray', 'khaki'];
-  var HL_FONTS = { classic: 'Aa', modern: 'Aa', script: 'Aa' };
-  function heroLive() {
-    var el = $('#hl-garment'), input = $('#hl-input');
-    if (!el || !G.hoodieover) return;
-    var hl = { product: 'hoodieover', color: 'black', tech: 'embroidery', place: 'center', type: 'text', font: 'classic', thread: 'white', text: '' };
-    var userTyped = false, timer = null;
-
-    $('#hl-colors').innerHTML = HL_COLORS.map(function (c) {
-      var col = colorOf('hoodieover', c);
-      return '<label class="swatch" title="' + esc(col.name) + '"><input type="radio" name="hl-color" value="' + c + '"' + (c === hl.color ? ' checked' : '') + '><span style="--c:' + col.hex + '" aria-hidden="true"></span><span class="sr-only">Колір: ' + esc(col.name) + '</span></label>';
-    }).join('');
-    $('#hl-fonts').innerHTML = Object.keys(HL_FONTS).map(function (f) {
-      return '<label class="chip chip--font"><input type="radio" name="hl-font" value="' + f + '"' + (f === hl.font ? ' checked' : '') + '><span style="font-family:' + FONTS[f].css.replace(/"/g, "'") + ';font-weight:' + FONTS[f].weight + '">' + HL_FONTS[f] + '</span><span class="sr-only">' + esc(FONTS[f].name) + '</span></label>';
-    }).join('');
-
-    function draw() { renderGarment(el, assign({}, DEFAULT, hl), { view: 'front', fill: 0.9, scale: 1.45, noDesign: !hl.text.trim() }); }
-    draw();
-
-    // Друкуємо приклади по літері, доки людина не почне писати сама.
-    var ex = 0, pos = 0, deleting = false;
-    function tick() {
-      if (userTyped) return;
-      var word = HL_EXAMPLES[ex % HL_EXAMPLES.length];
-      if (!deleting) {
-        pos++; hl.text = word.slice(0, pos); draw();
-        if (pos >= word.length) { deleting = true; timer = setTimeout(tick, 1600); return; }
-        timer = setTimeout(tick, 120);
-      } else {
-        pos--; hl.text = word.slice(0, pos); draw();
-        if (pos <= 0) { deleting = false; ex++; timer = setTimeout(tick, 350); return; }
-        timer = setTimeout(tick, 45);
-      }
-    }
-    if (reduceMotion()) { hl.text = HL_EXAMPLES[0]; draw(); }
-    else timer = setTimeout(tick, 500);
-
-    input.addEventListener('input', function () {
-      userTyped = true; clearTimeout(timer);
-      hl.text = input.value; draw();
-    });
-    $('#hlive').addEventListener('change', function (e) {
-      var t = e.target;
-      if (t.name === 'hl-color') { hl.color = t.value; hl.thread = autoThread('hoodieover', t.value, 'white'); }
-      if (t.name === 'hl-font') hl.font = t.value;
-      draw();
-    });
-    function go() {
-      var text = (input.value || '').trim() || hl.text.trim() || HL_EXAMPLES[0];
-      setState({ product: 'hoodieover', color: hl.color, tech: 'embroidery', type: 'text', text: text, font: hl.font, place: 'center', thread: hl.thread }, true);
-    }
-    $('#hl-go').addEventListener('click', go);
-    input.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); go(); } });
-  }
-
   /* ---------- Картки приводів: виріб із типовим дизайном ---------- */
   var OCC_PREVIEW = {
     love: { product: 'hoodieover', color: 'brown', type: 'initials', initials: 'А + М', istyle: 'plain', place: 'center', thread: 'white' },
     colleagues: { product: 'tote', color: 'beige', type: 'text', text: 'київ', font: 'modern', place: 'tote', thread: 'black', tech: 'print' },
     newyear: { product: 'sweat', color: 'navy', type: 'emblem', motif: 'snowflake', caption: '2027', place: 'center', thread: 'white' },
     xmas: { product: 'sweat', color: 'darkgreen', type: 'emblem', motif: 'tree', caption: '25.12', place: 'center', thread: 'white' },
-    hobby: { product: 'teeover', color: 'black', type: 'hogwarts', caption: '', place: 'center', thread: 'gold' }
+    hobby: { product: 'hoodieover', color: 'fume', type: 'hogwarts', crest: 'ravenclaw', caption: '', place: 'chest', thread: 'white' }
   };
   function renderOccasions() {
     $$('[data-occasion]').forEach(function (card) {
       var g = card.querySelector('.ocard__garment');
       var p = OCC_PREVIEW[card.getAttribute('data-occasion')];
-      if (g && p) renderGarment(g, assign({}, DEFAULT, { tech: 'embroidery' }, p), { lazy: true, fill: 0.84, scale: 1.3 });
-    });
-  }
-
-  /* ---------- Банер: приклади змінюються ---------- */
-  var HERO = [
-    { label: 'Вишивка «А + М» на худі оверсайз', s: { product: 'hoodieover', color: 'black', tech: 'embroidery', place: 'center', type: 'initials', initials: 'А + М', istyle: 'plain', thread: 'white' } },
-    { label: 'Вишивка «est. 2019» на світшоті', s: { product: 'sweat', color: 'graphite', tech: 'embroidery', place: 'center', type: 'text', text: 'est. 2019', font: 'classic', thread: 'white' } },
-    { label: 'Принт «київ» на шопері', s: { product: 'tote', color: 'beige', tech: 'print', place: 'tote', type: 'text', text: 'київ', font: 'modern', thread: 'black' } },
-    { label: 'Вишивка «зима 26/27» на кепці', s: { product: 'cap', color: 'black', tech: 'embroidery', place: 'capfront', type: 'text', text: 'зима 26/27', font: 'modern', thread: 'white' } }
-  ];
-  function heroLoop() {
-    var el = $('#hero-garment');
-    if (!el) return;
-    var i = 0, cap = $('#hero-label');
-    HERO.forEach(function (h) { var c = colorOf(h.s.product, h.s.color); var im = new Image(); im.src = 'images/g/' + h.s.product + '-' + c.id + '-front.webp'; });
-    function show() {
-      var h = HERO[i % HERO.length];
-      renderGarment(el, assign({}, DEFAULT, h.s), { view: 'front' });
-      if (cap) cap.textContent = h.label;
-    }
-    show();
-    if (reduceMotion()) return;
-    var timer = null, paused = false, btn = $('#hero-pause');
-    function play() { if (!timer && !paused && !document.hidden) timer = setInterval(function () { i++; show(); }, 3400); }
-    function stop() { clearInterval(timer); timer = null; }
-    play();
-    document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else play(); });
-    if (btn) btn.addEventListener('click', function () {
-      paused = !paused;
-      btn.setAttribute('aria-pressed', String(paused));
-      btn.setAttribute('aria-label', paused ? 'Продовжити показ прикладів' : 'Зупинити показ прикладів');
-      if (paused) stop(); else play();
+      if (g && p) renderGarment(g, assign({}, DEFAULT, p), { lazy: true, fill: 0.84, noDesign: true });
     });
   }
 
@@ -940,7 +864,6 @@
     $$('[data-days]').forEach(function (el) { el.textContent = CONFIG.productionDays; });
     $$('[data-tg]').forEach(function (el) { el.href = 'https://t.me/' + CONFIG.telegram; });
     $$('[data-base-price]').forEach(function (el) { el.textContent = money(CONFIG.base); });
-    heroLive();
     renderOccasions();
     renderCatalog();
     bindCarousel('#ocards', '#ocards-dots', 'data-ocards');

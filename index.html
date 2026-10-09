@@ -6,7 +6,7 @@
 <title>На подарунок — одяг з вашим написом, ініціалами чи датою</title>
 <meta name="description" content="Футболки, худі, світшоти, кепки й шопери з вишивкою або принтом: ініціали, дата, коротке слово, емблема чи герб Гоґвортсу. Макет до оплати, доставка Новою Поштою.">
 <meta name="theme-color" content="#FFFFFF">
-<link rel="preload" as="image" href="images/g/hoodieover-black-front.webp" fetchpriority="high">
+<link rel="preload" as="image" href="images/works/work-37.webp" fetchpriority="high">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -61,19 +61,10 @@
         <li><b>від 1 шт</b><span>без мінімалки</span></li>
       </ul>
     </div>
-    <div class="hlive" id="hlive">
-      <div class="garment hlive__garment" id="hl-garment" aria-live="off"></div>
-      <div class="hlive__panel">
-        <label class="hlive__label" for="hl-input">Спробуйте: впишіть ініціали, імʼя чи дату</label>
-        <div class="hlive__row">
-          <input class="input hlive__input" id="hl-input" type="text" maxlength="16" autocomplete="off" spellcheck="false" placeholder="напр. А + М…">
-          <button type="button" class="btn btn--primary hlive__go" id="hl-go">Далі</button>
-        </div>
-        <div class="hlive__opts">
-          <div class="hlive__colors" id="hl-colors" role="radiogroup" aria-label="Колір худі"></div>
-          <div class="hlive__fonts" id="hl-fonts" role="radiogroup" aria-label="Шрифт"></div>
-        </div>
-      </div>
+    <div class="hreel" aria-label="Фото готових робіт">
+      <div class="hreel__col"><div class="hreel__track"><img src="images/works/work-37.webp" alt="" width="480" height="600" decoding="async"><img src="images/works/work-26.webp" alt="" width="480" height="600" decoding="async"><img src="images/works/work-35.webp" alt="" width="480" height="600" decoding="async"><img src="images/works/work-31.webp" alt="" width="480" height="600" decoding="async"><img src="images/works/work-37.webp" alt="" width="480" height="600" decoding="async"><img src="images/works/work-26.webp" alt="" width="480" height="600" decoding="async"><img src="images/works/work-35.webp" alt="" width="480" height="600" decoding="async"><img src="images/works/work-31.webp" alt="" width="480" height="600" decoding="async"></div></div>
+      <div class="hreel__col hreel__col--rev"><div class="hreel__track"><img src="images/works/work-38.webp" alt="" width="480" height="600" decoding="async"><img src="images/works/work-42.webp" alt="" width="480" height="600" decoding="async"><img src="images/works/work-21.webp" alt="" width="480" height="600" decoding="async"><img src="images/works/work-49.webp" alt="" width="480" height="600" decoding="async"><img src="images/works/work-38.webp" alt="" width="480" height="600" decoding="async"><img src="images/works/work-42.webp" alt="" width="480" height="600" decoding="async"><img src="images/works/work-21.webp" alt="" width="480" height="600" decoding="async"><img src="images/works/work-49.webp" alt="" width="480" height="600" decoding="async"></div></div>
+      <span class="hreel__tag"><span class="dot" aria-hidden="true"></span>Справжні фото наших робіт</span>
     </div>
   </div>
 </section>
@@ -182,6 +173,13 @@
             <div class="field">
               <span class="field__label" id="l-motif">Емблема</span>
               <div class="chips" id="f-motif" role="radiogroup" aria-labelledby="l-motif"></div>
+            </div>
+          </div>
+
+          <div data-for-type="hogwarts" hidden>
+            <div class="field">
+              <span class="field__label" id="l-crest">Герб</span>
+              <div class="crests" id="f-crest" role="radiogroup" aria-labelledby="l-crest"></div>
             </div>
           </div>
 
@@ -323,14 +321,42 @@
 <section class="section gift" id="gift" aria-labelledby="gift-h">
   <div class="wrap gift__in">
     <figure class="gift__box">
-      <img src="images/people/gift-box.webp" alt="Чорна подарункова коробка" width="760" height="454" loading="lazy" decoding="async">
+      <span class="gift__wrap">
+        <img src="images/people/gift-box.webp" alt="Чорна подарункова коробка, перевʼязана стрічкою з бантом" width="760" height="454" loading="lazy" decoding="async">
+        <svg class="gift__ribbon" viewBox="0 0 760 454" aria-hidden="true">
+          <defs>
+            <linearGradient id="rbV" x1="0" x2="1"><stop offset="0" stop-color="#1B3FA8"/><stop offset=".45" stop-color="#3A6BF0"/><stop offset=".55" stop-color="#2F5EE6"/><stop offset="1" stop-color="#1A3A9C"/></linearGradient>
+            <linearGradient id="rbF" x1="0" x2="1"><stop offset="0" stop-color="#14307F"/><stop offset=".5" stop-color="#2149C2"/><stop offset="1" stop-color="#132C77"/></linearGradient>
+            <linearGradient id="rbH" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1D42AE"/><stop offset=".5" stop-color="#3567EE"/><stop offset="1" stop-color="#1B3EA4"/></linearGradient>
+            <radialGradient id="rbL" cx=".35" cy=".35" r=".8"><stop offset="0" stop-color="#4F7FFF"/><stop offset=".6" stop-color="#2A57DD"/><stop offset="1" stop-color="#173690"/></radialGradient>
+            <filter id="rbS" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000" flood-opacity=".45"/></filter>
+          </defs>
+          <!-- стрічка поперек кришки (у перспективі вужча до заднього краю) -->
+          <path d="M33 126 L728 126 L733 152 L27 152 Z" fill="url(#rbH)" opacity=".96"/>
+          <!-- стрічка вздовж кришки й по передній стінці -->
+          <path d="M366 3 L398 3 L403 279 L361 279 Z" fill="url(#rbV)"/>
+          <path d="M361 279 L403 279 L403 447 L361 447 Z" fill="url(#rbF)"/>
+          <path d="M361 279 L403 279" stroke="#0F2466" stroke-width="2" opacity=".6"/>
+          <!-- бант -->
+          <g filter="url(#rbS)">
+            <path d="M382 140 C 330 70, 250 78, 262 122 C 272 160, 340 158, 382 140 Z" fill="url(#rbL)"/>
+            <path d="M382 140 C 434 70, 514 78, 502 122 C 492 160, 424 158, 382 140 Z" fill="url(#rbL)"/>
+            <path d="M376 146 C 360 180, 342 206, 318 226 L 340 232 C 360 210, 374 184, 384 152 Z" fill="url(#rbV)"/>
+            <path d="M388 146 C 404 180, 424 206, 450 224 L 428 232 C 408 210, 392 184, 382 152 Z" fill="url(#rbV)"/>
+            <path d="M300 112 C 320 104, 350 118, 372 136" stroke="#0E2163" stroke-width="3" fill="none" opacity=".35"/>
+            <path d="M464 112 C 444 104, 414 118, 392 136" stroke="#0E2163" stroke-width="3" fill="none" opacity=".35"/>
+            <ellipse cx="382" cy="141" rx="20" ry="15" fill="#2A57DD"/>
+            <ellipse cx="378" cy="137" rx="9" ry="5" fill="#6E95FF" opacity=".55"/>
+          </g>
+        </svg>
+      </span>
           </figure>
     <div>
       <p class="eyebrow">Пакування</p>
       <h2 id="gift-h">Подарунок, готовий до вручення</h2>
       <p class="lead">Пакуємо у фірмову коробку й підписуємо листівку за вас.</p>
       <ul class="perks">
-        <li><strong>Коробка й листівка</strong>Напишіть побажання під час оформлення — впишемо його в листівку.</li>
+        <li><strong>Коробка зі стрічкою й листівка</strong>Напишіть побажання під час оформлення — впишемо його в листівку.</li>
         <li><strong>Виготовлення за <span data-days>3–5</span> робочих днів</strong>До Нового року й Різдва замовляйте заздалегідь.</li>
         <li><strong>Доставка Новою Поштою</strong>По всій Україні, за тарифами перевізника.</li>
         <li><strong>Оплата при отриманні або на карту</strong>Як вам зручніше.</li>
