@@ -5,7 +5,8 @@
 
   /* ---------- Налаштування магазину (заповнити) ---------- */
   var CONFIG = {
-    telegram: 'your_manager',          // [username менеджера в Telegram, без @]
+    telegram: 'napodarunok_bot',       // бот магазину
+    orderEndpoint: '',                 // адреса Worker'а + /order, напр. https://napodarunok-orders.<акаунт>.workers.dev/order
     productionDays: '3–5',             // [термін виготовлення, робочих днів]
     currency: '₴',
     base: 540                          // база за 1–2 шт
@@ -677,7 +678,7 @@
   }
   function showStep(name) {
     $$('[data-step]').forEach(function (el) { el.hidden = el.getAttribute('data-step') !== name; });
-    var titles = { cart: 'Кошик', checkout: 'Оформлення', done: 'Майже готово' };
+    var titles = { cart: 'Кошик', checkout: 'Оформлення', done: 'Майже готово', sent: 'Замовлення прийнято' };
     $('#cart-title').textContent = titles[name];
   }
 
@@ -734,14 +735,37 @@
       var msg = orderText(f);
       $('#order-text').value = msg;
       $('#tg-link').href = 'https://t.me/' + CONFIG.telegram;
+      if (CONFIG.orderEndpoint) { sendOrder(f, msg); return; }
+      showManual();
+    });
+
+    // Автоматично: замовлення йде менеджеру в Telegram через Worker. Якщо не вдалося — ручний спосіб.
+    function sendOrder(f, msg) {
+      var btn = f.querySelector('button[type=submit]');
+      btn.disabled = true; btn.textContent = 'Надсилаємо…';
+      fetch(CONFIG.orderEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: msg, name: f.elements.name.value, phone: f.elements.phone.value, website: f.elements.website ? f.elements.website.value : '' })
+      }).then(function (r) { return r.json(); }).then(function (res) {
+        if (!res || !res.ok) throw new Error('order');
+        cart = []; saveCart();
+        showStep('sent');
+        $('#cart-title').focus();
+      }).catch(function () {
+        showManual('Не вдалося надіслати автоматично. ');
+      }).then(function () { btn.disabled = false; btn.textContent = 'Підтвердити замовлення'; });
+    }
+
+    function showManual(prefix) {
       showStep('done');
       var rest = 'Відкрийте Telegram, вставте текст замовлення й надішліть менеджеру — він покаже макет і підтвердить замовлення. Після вашого «так» почнемо виготовлення.';
-      $('#done-copy').textContent = rest;
-      copy(msg, true, function (ok) {
-        $('#done-copy').textContent = (ok ? 'Ми скопіювали деталі замовлення. ' : 'Скопіюйте текст замовлення нижче. ') + rest;
+      $('#done-copy').textContent = (prefix || '') + rest;
+      copy($('#order-text').value, true, function (ok) {
+        $('#done-copy').textContent = (prefix || '') + (ok ? 'Ми скопіювали деталі замовлення. ' : 'Скопіюйте текст замовлення нижче. ') + rest;
       });
       $('#cart-title').focus();
-    });
+    }
     $('#copy-order').addEventListener('click', function () { copy($('#order-text').value); });
     $('#tg-link').addEventListener('click', function () {
       copy($('#order-text').value, true);

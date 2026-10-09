@@ -435,11 +435,19 @@
       </fieldset>
       <label class="radio"><input type="checkbox" id="c-gift" name="gift"><span>Це подарунок — додати листівку</span></label>
       <div class="field" id="gift-text-wrap" hidden><label class="field__label" for="c-gift-text">Текст листівки</label><textarea class="input" id="c-gift-text" name="giftText" rows="3" maxlength="200" autocomplete="off" placeholder="Напишіть побажання — ми впишемо його в листівку…"></textarea></div>
+      <div class="hp" aria-hidden="true"><label for="c-website">Сайт</label><input id="c-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
       <div class="field"><label class="field__label" for="c-comment">Коментар до замовлення</label><textarea class="input" id="c-comment" name="comment" rows="2" autocomplete="off" placeholder="Побажання щодо дизайну, термінів тощо…"></textarea></div>
       <div class="cart-total"><span>Разом</span><strong id="checkout-total"></strong></div>
       <button type="submit" class="btn btn--primary btn--block">Підтвердити замовлення</button>
       <button type="button" class="link-btn" id="back-to-cart">← Назад до кошика</button>
     </form>
+
+    <div class="drawer__body" data-step="sent" hidden>
+      <p class="done__title">Дякуємо! Замовлення прийнято.</p>
+      <p>Менеджер напише або зателефонує протягом робочого дня, покаже макет і підтвердить замовлення. Після вашого «так» почнемо виготовлення.</p>
+      <p class="hint">Є питання? Напишіть нам у Telegram — <a href="#" data-tg target="_blank" rel="noopener">@napodarunok_bot</a>.</p>
+      <button type="button" class="btn btn--ghost btn--block" data-close-cart>Повернутися до сайту</button>
+    </div>
 
     <div class="drawer__body" data-step="done" hidden>
       <p class="done__title">Дякуємо! Замовлення майже готове.</p>

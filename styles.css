@@ -497,3 +497,7 @@ button { font: inherit; color: inherit; }
 .hint a { display: inline-block; padding: 12px 0; margin: -12px 0; }
 @media (max-width: 860px) { .nav.is-open { box-shadow: 0 0 0 100vmax rgba(15, 17, 21, .35); } }
 @media (max-width: 900px) { body.in-hero .tg-fab { opacity: 0; visibility: hidden; } .tg-fab { width: 48px; height: 48px; } }
+
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+[data-step="sent"] { display: grid; align-content: start; gap: 12px; }
+[data-step="sent"][hidden] { display: none; }
