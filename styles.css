@@ -384,7 +384,7 @@ button { font: inherit; color: inherit; }
   .hero__pause { left: 8px; top: 8px; }
 }
 
-/* ===== Блоки за структурою loomiq.net ===== */
+/* ===== Перший екран, приводи, каталог, проєкти ===== */
 .muted-h { color: var(--muted); }
 .section__head--left { text-align: left; margin-left: 0; }
 .section__head .eyebrow { margin-bottom: 14px; }

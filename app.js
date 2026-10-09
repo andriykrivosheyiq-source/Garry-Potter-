@@ -1,5 +1,5 @@
 /* На подарунок — конструктор, готові ідеї, кошик, оформлення. Без залежностей.
-   Вироби й кольори — у garments.js (збирається tools/build-garments.py з мокапів Loomiq). */
+   Вироби й кольори — у garments.js (збирається tools/build-garments.py). */
 (function () {
   'use strict';
 
@@ -8,7 +8,7 @@
     telegram: 'your_manager',          // [username менеджера в Telegram, без @]
     productionDays: '3–5',             // [термін виготовлення, робочих днів]
     currency: '₴',
-    base: 540                          // база за 1–2 шт, як у конструкторі Loomiq
+    base: 540                          // база за 1–2 шт
   };
 
   var G = window.GARMENTS || {};
