@@ -551,23 +551,31 @@
     });
   }
 
-  /* ---------- Картки приводів: гортання ---------- */
-  function bindOcards() {
-    var box = $('#ocards'), dots = $('#ocards-dots');
+  /* ---------- Каруселі (приводи, проєкти): крапки за досяжними позиціями, стрілки вимикаються на краях ---------- */
+  function bindCarousel(trackSel, dotsSel, attr) {
+    var box = $(trackSel), dots = $(dotsSel);
     if (!box) return;
-    var cards = $$('.ocard', box);
-    if (dots) dots.innerHTML = cards.map(function () { return '<span></span>'; }).join('');
+    var cards = Array.prototype.slice.call(box.children);
+    var prev = $('[' + attr + '="-1"]'), next = $('[' + attr + '="1"]');
     function step() { return cards[1] ? cards[1].offsetLeft - cards[0].offsetLeft : box.clientWidth; }
+    function pages() { return Math.max(1, Math.round((box.scrollWidth - box.clientWidth) / step()) + 1); }
     function sync() {
-      var i = Math.round(box.scrollLeft / step());
-      $$('span', dots).forEach(function (d, k) { d.classList.toggle('is-on', k === i); });
+      var n = pages(), i = Math.min(n - 1, Math.round(box.scrollLeft / step()));
+      if (dots) {
+        if (dots.children.length !== n) dots.innerHTML = new Array(n + 1).join('<span></span>');
+        $$('span', dots).forEach(function (d, k) { d.classList.toggle('is-on', k === i); });
+        dots.hidden = n < 2;
+      }
+      if (prev) prev.disabled = box.scrollLeft < 4;
+      if (next) next.disabled = box.scrollLeft > box.scrollWidth - box.clientWidth - 4;
     }
-    $$('[data-ocards]').forEach(function (b) {
-      b.addEventListener('click', function () {
-        box.scrollBy({ left: step() * Number(b.getAttribute('data-ocards')), behavior: reduceMotion() ? 'auto' : 'smooth' });
+    [prev, next].forEach(function (b) {
+      if (b) b.addEventListener('click', function () {
+        box.scrollBy({ left: step() * Number(b.getAttribute(attr)), behavior: reduceMotion() ? 'auto' : 'smooth' });
       });
     });
     box.addEventListener('scroll', function () { window.requestAnimationFrame(sync); }, { passive: true });
+    window.addEventListener('resize', sync);
     sync();
   }
 
@@ -816,6 +824,12 @@
     }
   }
 
+  function bindFab() {
+    var hero = $('#top');
+    if (!hero || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (en) { document.body.classList.toggle('in-hero', en[0].isIntersecting); }, { threshold: 0.35 }).observe(hero);
+  }
+
   // Рукописний шрифт потрібен лише для одного варіанта напису — вантажимо після сторінки.
   window.addEventListener('load', function () {
     var l = document.createElement('link');
@@ -830,7 +844,8 @@
     $$('[data-base-price]').forEach(function (el) { el.textContent = money(CONFIG.base); });
     heroLoop();
     renderCatalog();
-    bindOcards();
+    bindCarousel('#ocards', '#ocards-dots', 'data-ocards');
+    bindCarousel('#cases-track', '#cases-dots', 'data-cases');
     bindIdeas();
     renderIdeas();
     bindBuilder();
@@ -838,6 +853,7 @@
     bindCart();
     renderCart();
     bindNav();
+    bindFab();
     var gg = $('#gift-garment');
     if (gg) renderGarment(gg, assign({}, DEFAULT, { product: 'sweat', color: 'graphite', tech: 'embroidery', place: 'center', type: 'emblem', motif: 'tree', caption: '25.12', thread: 'white' }), { lazy: true });
     var y = $('#year'); if (y) y.textContent = new Date().getFullYear();

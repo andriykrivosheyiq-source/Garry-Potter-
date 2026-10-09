@@ -28,13 +28,13 @@
       <a href="#catalog">Каталог</a>
       <a href="#constructor">Конструктор</a>
       <a href="#ideas">Ідеї</a>
-      <a href="#cases">Відгуки</a>
+      <a href="#cases">Проєкти</a>
       <a href="#gift">Доставка</a>
       <a href="#faq">Питання</a>
     </nav>
     <div class="header__actions">
       <button type="button" class="icon-btn" data-open-cart aria-label="Відкрити кошик">
-        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7zm3 0a3 3 0 016 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a2 2 0 01-2 1.8H8.2a2 2 0 01-2-1.8L5 8zM9 10V7a3 3 0 016 0v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span class="cart-count" hidden>0</span>
       </button>
       <button type="button" class="icon-btn menu-btn" id="menu-btn" aria-label="Меню" aria-expanded="false" aria-controls="nav">
@@ -62,9 +62,11 @@
       </ul>
     </div>
     <figure class="hero2__photo">
-      <img src="images/people/hero-pair.webp" alt="Пара в худі з вишитими ініціалами «А + М»" width="825" height="1100" fetchpriority="high" decoding="async">
-      <span class="hero2__mark hero2__mark--light" style="left:44%;top:46%" aria-hidden="true">А + М</span>
-      <span class="hero2__mark" style="left:79%;top:52%" aria-hidden="true">А + М</span>
+      <div class="hero2__scene">
+        <img src="images/people/hero-pair.webp" alt="Пара в худі з вишитими ініціалами «А + М»" width="825" height="1100" fetchpriority="high" decoding="async">
+        <span class="hero2__mark hero2__mark--light" style="left:46%;top:48.5%" aria-hidden="true">А + М</span>
+        <span class="hero2__mark" style="left:79%;top:50%" aria-hidden="true">А + М</span>
+      </div>
       <figcaption class="hero2__tag"><span class="dot" aria-hidden="true"></span>Парні худі з вишивкою «А + М»</figcaption>
     </figure>
   </div>
@@ -272,15 +274,22 @@
 <section class="section" id="cases" aria-labelledby="cases-h">
   <div class="wrap">
     <div class="section__head section__head--left">
-      <p class="eyebrow">Відгуки</p>
+      <p class="eyebrow">Проєкти</p>
       <h2 id="cases-h">Шиємо не лише подарунки</h2>
       <p>Наше виробництво працює з компаніями, клубами й брендами. Ось кілька проєктів.</p>
     </div>
-    <div class="cases" role="region" aria-label="Проєкти для компаній" tabindex="0">
+    <div class="cases" id="cases-track" role="region" aria-label="Проєкти для компаній" tabindex="0">
       <article class="case"><img src="images/cases/danko.webp" alt="Футболки DANKO на моделі" width="640" height="427" loading="lazy" decoding="async"><div class="case__body"><h3>DANKO</h3><p class="case__kind">Локальний бренд одягу</p><p>Лімітована колекція мерчу, де критичні якість друку й щільність футболки «як у преміумі». Зразок за 2 дні, узгодили відтінок і посадку, віддрукували всю партію без браку.</p><ul class="case__qty"><li>Футболки — 120 шт</li><li>Худі — 40 шт</li></ul></div></article>
       <article class="case"><img src="images/cases/riokan.webp" alt="Команда Riokan у брендованому одязі" width="640" height="427" loading="lazy" decoding="async"><div class="case__body"><h3>Riokan</h3><p class="case__kind">Будівельна компанія</p><p>Єдиний стиль для монтажних бригад і офісу. Щільний трикотаж, логотип вишивкою — не стирається від прання. Встигли за 8 днів до корпоративу.</p><ul class="case__qty"><li>Худі — 50 шт</li><li>Футболки — 70 шт</li><li>Кепки — 40 шт</li></ul></div></article>
       <article class="case"><img src="images/cases/zendokai.webp" alt="Форма спортивної секції Zendokai" width="640" height="427" loading="lazy" decoding="async"><div class="case__body"><h3>Zendokai Karate</h3><p class="case__kind">Спортивна секція</p><p>Форма для тренерів і вихованців до турніру: 6 розмірів від дитячих до дорослих і дедлайн 10 днів. DTF-друк — кольори яскраві навіть після сотні тренувань.</p><ul class="case__qty"><li>Футболки — 90 шт</li></ul></div></article>
       <article class="case"><img src="images/cases/sante.webp" alt="Форма для SPA-комплексу Studio Sante" width="640" height="512" loading="lazy" decoding="async"><div class="case__body"><h3>Studio Sante</h3><p class="case__kind">SPA-комплекс</p><p>Делікатна форма у фірмових кольорах. Дихаюча тканина, логотип тон-у-тон вишивкою — виглядає дорого й спокійно. Другу партію замовили за місяць.</p><ul class="case__qty"><li>Поло — 25 шт</li><li>Халати — 15 шт</li></ul></div></article>
+    </div>
+    <div class="ocards__nav">
+      <div class="ocards__dots" id="cases-dots" aria-hidden="true"></div>
+      <div class="ocards__arrows">
+        <button type="button" class="icon-btn" data-cases="-1" aria-label="Попередні проєкти"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="button" class="icon-btn" data-cases="1" aria-label="Наступні проєкти"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
     </div>
   </div>
 </section>

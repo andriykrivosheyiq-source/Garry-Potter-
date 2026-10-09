@@ -77,6 +77,6 @@ for prod, views in VIEWS.items():
     out[prod] = {'name': names[prod], 'colors': cols}
 
 with open(os.path.join(ROOT, 'garments.js'), 'w', encoding='utf-8') as fh:
-    fh.write('/* Створено tools/build-garments.py з мокапів Loomiq. Руками не правити. */\n')
+    fh.write('/* Створено tools/build-garments.py. Руками не правити. */\n')
     fh.write('window.GARMENTS = ' + json.dumps(out, ensure_ascii=False, separators=(',', ':')) + ';\n')
 print({k: len(v['colors']) for k, v in out.items()})
