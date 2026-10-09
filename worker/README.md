@@ -15,7 +15,7 @@
 4. **CHAT_ID**: напишіть боту `/start`, відкрийте в браузері
    `https://api.telegram.org/bot<ТОКЕН>/getUpdates` і візьміть число з `"chat":{"id":…}`.
 5. **Вебхук** (щоб працювали повідомлення покупців): відкрийте в браузері
-   `https://api.telegram.org/bot<ТОКЕН>/setWebhook?url=https://napodarunok-orders.<акаунт>.workers.dev/telegram&secret_token=<WEBHOOK_SECRET>`
-6. На сайті в `app.js` → `CONFIG.orderEndpoint` вписати `https://napodarunok-orders.<акаунт>.workers.dev/order`.
+   `https://api.telegram.org/bot<ТОКЕН>/setWebhook?url=https://napodarunok-orders.stvory.workers.dev/telegram&secret_token=<WEBHOOK_SECRET>`
+6. На сайті в `app.js` → `CONFIG.orderEndpoint` вписати `https://napodarunok-orders.stvory.workers.dev/order`.
 
 Токен ніколи не кладемо в код сайту чи в репозиторій — лише в секрети Worker'а.

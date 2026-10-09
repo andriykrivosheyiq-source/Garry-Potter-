@@ -6,7 +6,7 @@
   /* ---------- Налаштування магазину (заповнити) ---------- */
   var CONFIG = {
     telegram: 'napodarunok_bot',       // бот магазину
-    orderEndpoint: '',                 // адреса Worker'а + /order, напр. https://napodarunok-orders.<акаунт>.workers.dev/order
+    orderEndpoint: 'https://napodarunok-orders.stvory.workers.dev/order', // Worker: worker/order-worker.js
     productionDays: '3–5',             // [термін виготовлення, робочих днів]
     currency: '₴',
     base: 540                          // база за 1–2 шт
