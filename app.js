@@ -266,7 +266,7 @@
     var html = '<div class="garment__frame" style="left:' + (left * 100).toFixed(2) + '%;top:' + (top * 100).toFixed(2) + '%;width:' + (W * 100).toFixed(2) + '%;height:' + (H * 100).toFixed(2) + '%">' +
       '<img src="images/g/' + s.product + '-' + col.id + '-' + view + '.webp" alt="' + esc(alt) + '" width="' + shot[0] + '" height="' + shot[1] + '"' + (opts.lazy ? ' loading="lazy"' : '') + ' decoding="async">';
     if (showDesign && !opts.noDesign) {
-      html += '<div class="garment__design garment__design--' + s.tech + '" style="left:' + (shot[2] + pl.fx * shot[4]).toFixed(2) + '%;top:' + (shot[3] + pl.fy * shot[5]).toFixed(2) + '%;width:' + (pl.fw * shot[4]).toFixed(2) + '%;' +
+      html += '<div class="garment__design garment__design--' + s.tech + '" style="left:' + (shot[2] + pl.fx * shot[4]).toFixed(2) + '%;top:' + (shot[3] + pl.fy * shot[5]).toFixed(2) + '%;width:' + (pl.fw * shot[4] * (opts.scale || 1)).toFixed(2) + '%;' +
         (pl.rot ? 'transform:translate(-50%,-50%) rotate(' + pl.rot + 'deg)' : '') + '">' + designSVG(s) + '</div>';
     }
     html += '</div>';
@@ -580,6 +580,80 @@
     sync();
   }
 
+
+  /* ---------- Перший екран: живий напис на худі ---------- */
+  var HL_EXAMPLES = ['А + М', 'est. 2019', 'Оля', 'київ', '14.02'];
+  var HL_COLORS = ['black', 'white', 'brown', 'gray', 'khaki'];
+  var HL_FONTS = { classic: 'Aa', modern: 'Aa', script: 'Aa' };
+  function heroLive() {
+    var el = $('#hl-garment'), input = $('#hl-input');
+    if (!el || !G.hoodieover) return;
+    var hl = { product: 'hoodieover', color: 'black', tech: 'embroidery', place: 'center', type: 'text', font: 'classic', thread: 'white', text: '' };
+    var userTyped = false, timer = null;
+
+    $('#hl-colors').innerHTML = HL_COLORS.map(function (c) {
+      var col = colorOf('hoodieover', c);
+      return '<label class="swatch" title="' + esc(col.name) + '"><input type="radio" name="hl-color" value="' + c + '"' + (c === hl.color ? ' checked' : '') + '><span style="--c:' + col.hex + '" aria-hidden="true"></span><span class="sr-only">Колір: ' + esc(col.name) + '</span></label>';
+    }).join('');
+    $('#hl-fonts').innerHTML = Object.keys(HL_FONTS).map(function (f) {
+      return '<label class="chip chip--font"><input type="radio" name="hl-font" value="' + f + '"' + (f === hl.font ? ' checked' : '') + '><span style="font-family:' + FONTS[f].css.replace(/"/g, "'") + ';font-weight:' + FONTS[f].weight + '">' + HL_FONTS[f] + '</span><span class="sr-only">' + esc(FONTS[f].name) + '</span></label>';
+    }).join('');
+
+    function draw() { renderGarment(el, assign({}, DEFAULT, hl), { view: 'front', fill: 0.9, scale: 1.45, noDesign: !hl.text.trim() }); }
+    draw();
+
+    // Друкуємо приклади по літері, доки людина не почне писати сама.
+    var ex = 0, pos = 0, deleting = false;
+    function tick() {
+      if (userTyped) return;
+      var word = HL_EXAMPLES[ex % HL_EXAMPLES.length];
+      if (!deleting) {
+        pos++; hl.text = word.slice(0, pos); draw();
+        if (pos >= word.length) { deleting = true; timer = setTimeout(tick, 1600); return; }
+        timer = setTimeout(tick, 120);
+      } else {
+        pos--; hl.text = word.slice(0, pos); draw();
+        if (pos <= 0) { deleting = false; ex++; timer = setTimeout(tick, 350); return; }
+        timer = setTimeout(tick, 45);
+      }
+    }
+    if (reduceMotion()) { hl.text = HL_EXAMPLES[0]; draw(); }
+    else timer = setTimeout(tick, 500);
+
+    input.addEventListener('input', function () {
+      userTyped = true; clearTimeout(timer);
+      hl.text = input.value; draw();
+    });
+    $('#hlive').addEventListener('change', function (e) {
+      var t = e.target;
+      if (t.name === 'hl-color') { hl.color = t.value; hl.thread = autoThread('hoodieover', t.value, 'white'); }
+      if (t.name === 'hl-font') hl.font = t.value;
+      draw();
+    });
+    function go() {
+      var text = (input.value || '').trim() || hl.text.trim() || HL_EXAMPLES[0];
+      setState({ product: 'hoodieover', color: hl.color, tech: 'embroidery', type: 'text', text: text, font: hl.font, place: 'center', thread: hl.thread }, true);
+    }
+    $('#hl-go').addEventListener('click', go);
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); go(); } });
+  }
+
+  /* ---------- Картки приводів: виріб із типовим дизайном ---------- */
+  var OCC_PREVIEW = {
+    love: { product: 'hoodieover', color: 'brown', type: 'initials', initials: 'А + М', istyle: 'plain', place: 'center', thread: 'white' },
+    colleagues: { product: 'tote', color: 'beige', type: 'text', text: 'київ', font: 'modern', place: 'tote', thread: 'black', tech: 'print' },
+    newyear: { product: 'sweat', color: 'navy', type: 'emblem', motif: 'snowflake', caption: '2027', place: 'center', thread: 'white' },
+    xmas: { product: 'sweat', color: 'darkgreen', type: 'emblem', motif: 'tree', caption: '25.12', place: 'center', thread: 'white' },
+    hobby: { product: 'teeover', color: 'black', type: 'hogwarts', caption: '', place: 'center', thread: 'gold' }
+  };
+  function renderOccasions() {
+    $$('[data-occasion]').forEach(function (card) {
+      var g = card.querySelector('.ocard__garment');
+      var p = OCC_PREVIEW[card.getAttribute('data-occasion')];
+      if (g && p) renderGarment(g, assign({}, DEFAULT, { tech: 'embroidery' }, p), { lazy: true, fill: 0.84, scale: 1.3 });
+    });
+  }
+
   /* ---------- Банер: приклади змінюються ---------- */
   var HERO = [
     { label: 'Вишивка «А + М» на худі оверсайз', s: { product: 'hoodieover', color: 'black', tech: 'embroidery', place: 'center', type: 'initials', initials: 'А + М', istyle: 'plain', thread: 'white' } },
@@ -866,7 +940,8 @@
     $$('[data-days]').forEach(function (el) { el.textContent = CONFIG.productionDays; });
     $$('[data-tg]').forEach(function (el) { el.href = 'https://t.me/' + CONFIG.telegram; });
     $$('[data-base-price]').forEach(function (el) { el.textContent = money(CONFIG.base); });
-    heroLoop();
+    heroLive();
+    renderOccasions();
     renderCatalog();
     bindCarousel('#ocards', '#ocards-dots', 'data-ocards');
     bindCarousel('#cases-track', '#cases-dots', 'data-cases');

@@ -6,7 +6,7 @@
 <title>На подарунок — одяг з вашим написом, ініціалами чи датою</title>
 <meta name="description" content="Футболки, худі, світшоти, кепки й шопери з вишивкою або принтом: ініціали, дата, коротке слово, емблема чи герб Гоґвортсу. Макет до оплати, доставка Новою Поштою.">
 <meta name="theme-color" content="#FFFFFF">
-<link rel="preload" as="image" href="images/people/hero-pair.webp" fetchpriority="high">
+<link rel="preload" as="image" href="images/g/hoodieover-black-front.webp" fetchpriority="high">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -61,14 +61,20 @@
         <li><b>від 1 шт</b><span>без мінімалки</span></li>
       </ul>
     </div>
-    <figure class="hero2__photo">
-      <div class="hero2__scene">
-        <img src="images/people/hero-pair.webp" alt="Пара в худі з вишитими ініціалами «А + М»" width="825" height="1100" fetchpriority="high" decoding="async">
-        <span class="hero2__mark hero2__mark--light" style="left:46%;top:48.5%" aria-hidden="true">А + М</span>
-        <span class="hero2__mark" style="left:79%;top:50%" aria-hidden="true">А + М</span>
+    <div class="hlive" id="hlive">
+      <div class="garment hlive__garment" id="hl-garment" aria-live="off"></div>
+      <div class="hlive__panel">
+        <label class="hlive__label" for="hl-input">Спробуйте: впишіть ініціали, імʼя чи дату</label>
+        <div class="hlive__row">
+          <input class="input hlive__input" id="hl-input" type="text" maxlength="16" autocomplete="off" spellcheck="false" placeholder="напр. А + М…">
+          <button type="button" class="btn btn--primary hlive__go" id="hl-go">Далі</button>
+        </div>
+        <div class="hlive__opts">
+          <div class="hlive__colors" id="hl-colors" role="radiogroup" aria-label="Колір худі"></div>
+          <div class="hlive__fonts" id="hl-fonts" role="radiogroup" aria-label="Шрифт"></div>
+        </div>
       </div>
-      <figcaption class="hero2__tag"><span class="dot" aria-hidden="true"></span>Парні худі з вишивкою «А + М»</figcaption>
-    </figure>
+    </div>
   </div>
 </section>
 
@@ -79,11 +85,11 @@
       <p>Оберіть, кому даруєте, — покажемо готові ідеї. Будь-яку можна змінити під себе.</p>
     </div>
     <div class="ocards" id="ocards">
-      <button type="button" class="ocard" data-occasion="love"><span class="ocard__text"><span class="ocard__name">Коханим</span><span class="ocard__desc">Ініціали двох, дата знайомства, координати важливого місця.</span></span><img src="images/people/hoodieover-pair-front.webp" alt="" width="600" height="800" loading="lazy" decoding="async"></button>
-      <button type="button" class="ocard" data-occasion="colleagues"><span class="ocard__text"><span class="ocard__name">Колегам</span><span class="ocard__desc">Стримано й доречно: місто, ініціали, маленька емблема.</span></span><img src="images/people/tee-pair-front.webp" alt="" width="600" height="800" loading="lazy" decoding="async"></button>
-      <button type="button" class="ocard" data-occasion="newyear"><span class="ocard__text"><span class="ocard__name">На Новий рік</span><span class="ocard__desc">Рік на рукаві, сніжинка, однакові худі для всієї родини.</span></span><img src="images/people/hoodie-woman.webp" alt="" width="600" height="800" loading="lazy" decoding="async"></button>
-      <button type="button" class="ocard" data-occasion="xmas"><span class="ocard__text"><span class="ocard__name">На Різдво</span><span class="ocard__desc">Тепле худі чи світшот з ялинкою або зіркою.</span></span><img src="images/people/hoodieover-woman.webp" alt="" width="600" height="800" loading="lazy" decoding="async"></button>
-      <button type="button" class="ocard" data-occasion="hobby"><span class="ocard__text"><span class="ocard__name">Фанатам і хобі</span><span class="ocard__desc">Герб Гоґвортсу, біг, музика, кава.</span></span><img src="images/people/hoodieover-man.webp" alt="" width="600" height="800" loading="lazy" decoding="async"></button>
+      <button type="button" class="ocard" data-occasion="love"><span class="ocard__text"><span class="ocard__name">Коханим</span><span class="ocard__desc">Ініціали двох, дата знайомства, координати важливого місця.</span></span><span class="garment ocard__garment"></span></button>
+      <button type="button" class="ocard" data-occasion="colleagues"><span class="ocard__text"><span class="ocard__name">Колегам</span><span class="ocard__desc">Стримано й доречно: місто, ініціали, маленька емблема.</span></span><span class="garment ocard__garment"></span></button>
+      <button type="button" class="ocard" data-occasion="newyear"><span class="ocard__text"><span class="ocard__name">На Новий рік</span><span class="ocard__desc">Рік на рукаві, сніжинка, однакові худі для всієї родини.</span></span><span class="garment ocard__garment"></span></button>
+      <button type="button" class="ocard" data-occasion="xmas"><span class="ocard__text"><span class="ocard__name">На Різдво</span><span class="ocard__desc">Тепле худі чи світшот з ялинкою або зіркою.</span></span><span class="garment ocard__garment"></span></button>
+      <button type="button" class="ocard" data-occasion="hobby"><span class="ocard__text"><span class="ocard__name">Фанатам і хобі</span><span class="ocard__desc">Герб Гоґвортсу, біг, музика, кава.</span></span><span class="garment ocard__garment"></span></button>
     </div>
     <div class="ocards__nav">
       <div class="ocards__dots" id="ocards-dots" aria-hidden="true"></div>
@@ -317,9 +323,8 @@
 <section class="section gift" id="gift" aria-labelledby="gift-h">
   <div class="wrap gift__in">
     <figure class="gift__box">
-      <img src="images/people/gift-box.webp" alt="Чорна подарункова коробка" width="800" height="471" loading="lazy" decoding="async">
-      <span class="gift__brand" aria-hidden="true" translate="no">на подарунок</span>
-    </figure>
+      <img src="images/people/gift-box.webp" alt="Чорна подарункова коробка" width="760" height="454" loading="lazy" decoding="async">
+          </figure>
     <div>
       <p class="eyebrow">Пакування</p>
       <h2 id="gift-h">Подарунок, готовий до вручення</h2>
