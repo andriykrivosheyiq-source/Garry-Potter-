@@ -6,7 +6,7 @@
 <title>На подарунок — одяг з вашим написом, ініціалами чи датою</title>
 <meta name="description" content="Футболки, худі, світшоти, кепки й шопери з вишивкою або принтом: ініціали, дата, коротке слово, емблема чи герб Гоґвортсу. Макет до оплати, доставка Новою Поштою.">
 <meta name="theme-color" content="#FFFFFF">
-<link rel="preload" as="image" href="images/g/hoodieover-black-front.webp" fetchpriority="high">
+<link rel="preload" as="image" href="images/people/hero-pair.webp" fetchpriority="high">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,9 +25,10 @@
       <span translate="no">На подарунок</span>
     </a>
     <nav class="nav" id="nav" aria-label="Головне меню">
-      <a href="#ideas">Ідеї</a>
+      <a href="#catalog">Каталог</a>
       <a href="#constructor">Конструктор</a>
-      <a href="#works">Наші роботи</a>
+      <a href="#ideas">Ідеї</a>
+      <a href="#cases">Відгуки</a>
       <a href="#gift">Доставка</a>
       <a href="#faq">Питання</a>
     </nav>
@@ -45,64 +46,68 @@
 
 <main id="main">
 
-<section class="hero" id="top">
-  <div class="wrap hero__in">
-    <div class="hero__text">
-      <p class="eyebrow">Вишивка й принт на одязі</p>
-      <h1>Подарунок, зроблений для однієї людини</h1>
-      <p class="lead">Футболки, худі, світшоти, кепки й шопери. Вишиваємо чи друкуємо монограму, дату, коротке слово або невелику емблему. Перед виготовленням погоджуємо з вами макет. Готово за <span data-days>3–5</span> робочих днів.</p>
-      <div class="hero__cta">
-        <a class="btn btn--primary" href="#constructor">Створити свій</a>
-        <a class="btn btn--ghost" href="#ideas">Готові ідеї</a>
+<section class="hero2" id="top">
+  <div class="wrap hero2__in">
+    <div class="hero2__text">
+      <h1>Одяг з вашим написом — на подарунок</h1>
+      <p class="lead">Ініціали, дата чи коротке слово вишивкою або принтом на худі, футболці, світшоті, кепці чи шопері. Одразу бачите, як виглядатиме, і точну ціну.</p>
+      <div class="hero2__cta">
+        <a class="btn btn--primary btn--lg" href="#constructor">Створити подарунок</a>
+        <a class="btn btn--ghost btn--lg" href="#ideas">Готові ідеї</a>
       </div>
-      <ul class="trust">
-        <li>Макет до оплати</li>
-        <li>Фото перед відправкою</li>
-        <li><span>Від <span data-base-price>540 ₴</span></span></li>
+      <ul class="hero2__facts">
+        <li><b>від <span data-base-price>540 ₴</span></b><span>за готовий виріб</span></li>
+        <li><b><span data-days>3–5</span> днів</b><span>виготовлення</span></li>
+        <li><b>від 1 шт</b><span>без мінімалки</span></li>
       </ul>
     </div>
-    <figure class="hero__visual">
-            <button type="button" class="hero__pause" id="hero-pause" aria-pressed="false" aria-label="Зупинити показ прикладів">
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path class="i-pause" d="M8 5v14M16 5v14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path class="i-play" d="M8 5l11 7-11 7z" fill="currentColor"/></svg>
-      </button>
-      <div class="garment garment--hero" id="hero-garment"></div>
-      <figcaption class="hero__tag"><span class="dot" aria-hidden="true"></span><span id="hero-label">Вишивка «А + М» на худі оверсайз</span></figcaption>
+    <figure class="hero2__photo">
+      <img src="images/people/hero-pair.webp" alt="Пара в худі з вишитими ініціалами «А + М»" width="825" height="1100" fetchpriority="high" decoding="async">
+      <span class="hero2__mark hero2__mark--light" style="left:44%;top:46%" aria-hidden="true">А + М</span>
+      <span class="hero2__mark" style="left:79%;top:52%" aria-hidden="true">А + М</span>
+      <figcaption class="hero2__tag"><span class="dot" aria-hidden="true"></span>Парні худі з вишивкою «А + М»</figcaption>
     </figure>
   </div>
 </section>
 
 <section class="section occasions" aria-labelledby="occasions-h">
   <div class="wrap">
-    <div class="section__head">
-      <h2 id="occasions-h">Кому даруєте?</h2>
-      <p>Оберіть привід — покажемо готові ідеї. Будь-яку можна змінити під себе.</p>
+    <div class="section__head section__head--left">
+      <h2 id="occasions-h">Подарунок для будь-якого приводу</h2>
+      <p>Оберіть, кому даруєте, — покажемо готові ідеї. Будь-яку можна змінити під себе.</p>
     </div>
-    <div class="occasions__grid">
-      <button type="button" class="occasion" data-occasion="love"><span class="occasion__icon" data-motif="heart"></span><span class="occasion__name">Коханим</span><span class="occasion__desc">Ініціали двох, дата знайомства, координати важливого місця.</span></button>
-      <button type="button" class="occasion" data-occasion="colleagues"><span class="occasion__icon" data-motif="coffee"></span><span class="occasion__name">Колегам</span><span class="occasion__desc">Стримано й доречно: місто, ініціали, маленька емблема.</span></button>
-      <button type="button" class="occasion" data-occasion="newyear"><span class="occasion__icon" data-motif="snowflake"></span><span class="occasion__name">На Новий рік</span><span class="occasion__desc">Рік на рукаві, сніжинка, однакові худі для всієї родини.</span></button>
-      <button type="button" class="occasion" data-occasion="xmas"><span class="occasion__icon" data-motif="tree"></span><span class="occasion__name">На Різдво</span><span class="occasion__desc">Тепле худі чи світшот з ялинкою або зіркою.</span></button>
-      <button type="button" class="occasion" data-occasion="hobby"><span class="occasion__icon" data-motif="note"></span><span class="occasion__name">Фанатам і хобі</span><span class="occasion__desc">Герб Гоґвортсу, біг, музика, кава.</span></button>
+    <div class="ocards" id="ocards">
+      <button type="button" class="ocard" data-occasion="love"><span class="ocard__text"><span class="ocard__name">Коханим</span><span class="ocard__desc">Ініціали двох, дата знайомства, координати важливого місця.</span></span><img src="images/people/hoodieover-pair-front.webp" alt="" width="600" height="800" loading="lazy" decoding="async"></button>
+      <button type="button" class="ocard" data-occasion="colleagues"><span class="ocard__text"><span class="ocard__name">Колегам</span><span class="ocard__desc">Стримано й доречно: місто, ініціали, маленька емблема.</span></span><img src="images/people/tee-pair-front.webp" alt="" width="600" height="800" loading="lazy" decoding="async"></button>
+      <button type="button" class="ocard" data-occasion="newyear"><span class="ocard__text"><span class="ocard__name">На Новий рік</span><span class="ocard__desc">Рік на рукаві, сніжинка, однакові худі для всієї родини.</span></span><img src="images/people/hoodie-woman.webp" alt="" width="600" height="800" loading="lazy" decoding="async"></button>
+      <button type="button" class="ocard" data-occasion="xmas"><span class="ocard__text"><span class="ocard__name">На Різдво</span><span class="ocard__desc">Тепле худі чи світшот з ялинкою або зіркою.</span></span><img src="images/people/hoodieover-woman.webp" alt="" width="600" height="800" loading="lazy" decoding="async"></button>
+      <button type="button" class="ocard" data-occasion="hobby"><span class="ocard__text"><span class="ocard__name">Фанатам і хобі</span><span class="ocard__desc">Герб Гоґвортсу, біг, музика, кава.</span></span><img src="images/people/hoodieover-man.webp" alt="" width="600" height="800" loading="lazy" decoding="async"></button>
+    </div>
+    <div class="ocards__nav">
+      <div class="ocards__dots" id="ocards-dots" aria-hidden="true"></div>
+      <div class="ocards__arrows">
+        <button type="button" class="icon-btn" data-ocards="-1" aria-label="Попередні картки"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="button" class="icon-btn" data-ocards="1" aria-label="Наступні картки"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section section--alt" id="ideas" aria-labelledby="ideas-h">
+<section class="section section--alt" id="catalog" aria-labelledby="catalog-h">
   <div class="wrap">
     <div class="section__head">
-      <h2 id="ideas-h" tabindex="-1">Готові ідеї</h2>
-      <p>Натисніть «Персоналізувати» — ідея відкриється в конструкторі, і ви заміните текст, колір чи виріб.</p>
+      <p class="eyebrow">Каталог</p>
+      <h2 id="catalog-h">Одяг, який хочеться носити щодня</h2>
+      <p>Щільні тканини, продуманий крій. Оберіть виріб — відкриємо його в конструкторі.</p>
     </div>
-    <div class="filters" id="idea-filter" role="group" aria-label="Привід"></div>
-    <div class="designs__grid" id="ideas-grid"></div>
-    <div class="more"><button type="button" class="btn btn--ghost" id="ideas-more" hidden>Показати всі ідеї</button></div>
+    <div class="catalog" id="catalog-grid"></div>
   </div>
 </section>
 
-<section class="section builder-sec" id="constructor" aria-labelledby="constructor-h">
+<section class="section section--alt builder-sec" id="constructor" aria-labelledby="constructor-h">
   <div class="wrap">
     <div class="section__head">
-      <h2 id="constructor-h" tabindex="-1">Створіть свій подарунок</h2>
+      <h2 id="constructor-h" tabindex="-1">Подарунок <span class="muted-h">за 3 кроки</span></h2>
       <p>Три кроки — і ви бачите, як він виглядатиме. Ціна оновлюється одразу.</p>
     </div>
 
@@ -213,11 +218,43 @@
   </div>
 </section>
 
+<section class="section" id="ideas" aria-labelledby="ideas-h">
+  <div class="wrap">
+    <div class="section__head">
+      <h2 id="ideas-h" tabindex="-1">Готові ідеї</h2>
+      <p>Натисніть «Персоналізувати» — ідея відкриється в конструкторі, і ви заміните текст, колір чи виріб.</p>
+    </div>
+    <div class="filters" id="idea-filter" role="group" aria-label="Привід"></div>
+    <div class="designs__grid" id="ideas-grid"></div>
+    <div class="more"><button type="button" class="btn btn--ghost" id="ideas-more" hidden>Показати всі ідеї</button></div>
+  </div>
+</section>
+
+
+<section class="section" id="why" aria-labelledby="why-h">
+  <div class="wrap wrap--narrow">
+    <div class="section__head">
+      <p class="eyebrow">Переваги</p>
+      <h2 id="why-h">Чому замовляють у нас</h2>
+      <p>Порівняйте з тим, як зазвичай замовляють вишивку на подарунок.</p>
+    </div>
+    <div class="compare-t" role="table" aria-label="Порівняння">
+      <div class="compare-t__row compare-t__row--head" role="row"><span role="columnheader"></span><span role="columnheader" class="us" translate="no">На подарунок</span><span role="columnheader">Більшість майстерень</span></div>
+      <div class="compare-t__row" role="row"><span role="rowheader">Ціна</span><span role="cell" class="us">Одразу в конструкторі</span><span role="cell">Прорахунок 1–2 дні</span></div>
+      <div class="compare-t__row" role="row"><span role="rowheader">Макет</span><span role="cell" class="us">Бачите одразу, погоджуємо до оплати</span><span role="cell">Через 1–2 дні</span></div>
+      <div class="compare-t__row" role="row"><span role="rowheader">Кількість</span><span role="cell" class="us">Від 1 штуки</span><span role="cell">Від 10–20 штук</span></div>
+      <div class="compare-t__row" role="row"><span role="rowheader">Вибір виробів</span><span role="cell" class="us">9 моделей, понад 70 кольорів</span><span role="cell">Обмежений</span></div>
+      <div class="compare-t__row" role="row"><span role="rowheader">Гарантія</span><span role="cell" class="us">Не як на макеті — переробимо або повернемо гроші</span><span role="cell">Як домовитесь</span></div>
+    </div>
+  </div>
+</section>
+
 <section class="section section--alt" id="works" aria-labelledby="works-h">
   <div class="wrap">
     <div class="section__head">
+      <p class="eyebrow">Наші роботи</p>
       <h2 id="works-h">Як це виглядає наживо</h2>
-      <p>Справжні фото готових кепок, худі й футболок із виробництва Loomiq — так ваш подарунок виглядатиме в руках.</p>
+      <p>Справжні фото готових кепок, худі й футболок з нашого виробництва.</p>
     </div>
     <div class="works" role="region" aria-label="Фото готових робіт" tabindex="0">
       <img src="images/works/work-37.webp" alt="Кепки з вишитим написом «CREATOR»" width="480" height="600" loading="lazy" decoding="async">
@@ -232,48 +269,71 @@
   </div>
 </section>
 
-<section class="section" id="quality" aria-labelledby="quality-h">
+<section class="section" id="cases" aria-labelledby="cases-h">
   <div class="wrap">
-    <div class="section__head"><h2 id="quality-h">Як ми контролюємо якість</h2></div>
+    <div class="section__head section__head--left">
+      <p class="eyebrow">Відгуки</p>
+      <h2 id="cases-h">Шиємо не лише подарунки</h2>
+      <p>Наше виробництво працює з компаніями, клубами й брендами. Ось кілька проєктів.</p>
+    </div>
+    <div class="cases" role="region" aria-label="Проєкти для компаній" tabindex="0">
+      <article class="case"><img src="images/cases/danko.webp" alt="Футболки DANKO на моделі" width="640" height="427" loading="lazy" decoding="async"><div class="case__body"><h3>DANKO</h3><p class="case__kind">Локальний бренд одягу</p><p>Лімітована колекція мерчу, де критичні якість друку й щільність футболки «як у преміумі». Зразок за 2 дні, узгодили відтінок і посадку, віддрукували всю партію без браку.</p><ul class="case__qty"><li>Футболки — 120 шт</li><li>Худі — 40 шт</li></ul></div></article>
+      <article class="case"><img src="images/cases/riokan.webp" alt="Команда Riokan у брендованому одязі" width="640" height="427" loading="lazy" decoding="async"><div class="case__body"><h3>Riokan</h3><p class="case__kind">Будівельна компанія</p><p>Єдиний стиль для монтажних бригад і офісу. Щільний трикотаж, логотип вишивкою — не стирається від прання. Встигли за 8 днів до корпоративу.</p><ul class="case__qty"><li>Худі — 50 шт</li><li>Футболки — 70 шт</li><li>Кепки — 40 шт</li></ul></div></article>
+      <article class="case"><img src="images/cases/zendokai.webp" alt="Форма спортивної секції Zendokai" width="640" height="427" loading="lazy" decoding="async"><div class="case__body"><h3>Zendokai Karate</h3><p class="case__kind">Спортивна секція</p><p>Форма для тренерів і вихованців до турніру: 6 розмірів від дитячих до дорослих і дедлайн 10 днів. DTF-друк — кольори яскраві навіть після сотні тренувань.</p><ul class="case__qty"><li>Футболки — 90 шт</li></ul></div></article>
+      <article class="case"><img src="images/cases/sante.webp" alt="Форма для SPA-комплексу Studio Sante" width="640" height="512" loading="lazy" decoding="async"><div class="case__body"><h3>Studio Sante</h3><p class="case__kind">SPA-комплекс</p><p>Делікатна форма у фірмових кольорах. Дихаюча тканина, логотип тон-у-тон вишивкою — виглядає дорого й спокійно. Другу партію замовили за місяць.</p><ul class="case__qty"><li>Поло — 25 шт</li><li>Халати — 15 шт</li></ul></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt" id="about" aria-labelledby="about-h">
+  <div class="wrap">
+    <div class="section__head">
+      <p class="eyebrow">Про нас</p>
+      <h2 id="about-h">Контролюємо якість на кожному етапі</h2>
+      <p>Від макета до готового виробу — щоб подарунок був саме таким, як ви уявляли.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>120+</b><span>людей на виробництві</span></div>
+      <div class="stat"><b>5+ років</b><span>досвіду у вишивці й друці</span></div>
+      <div class="stat"><b>1000+</b><span>виконаних проєктів</span></div>
+    </div>
     <ol class="how">
       <li><span class="how__n" aria-hidden="true">1</span><h3>Спершу макет</h3><p>Показуємо, як виглядатиме напис, і беремося до роботи лише після вашого «так».</p></li>
       <li><span class="how__n" aria-hidden="true">2</span><h3>Фото перед відправкою</h3><p>Знімаємо готовий виріб і надсилаємо вам, перш ніж передати на Нову Пошту.</p></li>
-      <li><span class="how__n" aria-hidden="true">3</span><h3>Помилка з нашого боку — переробимо</h3><p>Якщо виріб не відповідає макету або має брак, безкоштовно виправимо чи повернемо гроші.</p></li>
+      <li><span class="how__n" aria-hidden="true">3</span><h3>Не як на макеті — переробимо</h3><p>Якщо виріб відрізняється від погодженого макета або має брак, переробимо за наш рахунок чи повернемо гроші.</p></li>
     </ol>
   </div>
 </section>
 
-<section class="section section--alt gift" id="gift" aria-labelledby="gift-h">
+<section class="section gift" id="gift" aria-labelledby="gift-h">
   <div class="wrap gift__in">
-    <div class="gift__scene" aria-hidden="true">
-      <div class="garment gift__garment" id="gift-garment"></div>
-      <div class="gift__card">
-        <p class="gift__card-to">Для Олі</p>
-        <p class="gift__card-text">З Різдвом! Нехай у домі буде тепло.</p>
-      </div>
-    </div>
+    <figure class="gift__box">
+      <img src="images/people/gift-box.webp" alt="Чорна подарункова коробка" width="800" height="471" loading="lazy" decoding="async">
+      <span class="gift__brand" aria-hidden="true" translate="no">на подарунок</span>
+    </figure>
     <div>
+      <p class="eyebrow">Пакування</p>
       <h2 id="gift-h">Подарунок, готовий до вручення</h2>
-      <p class="lead">Пакуємо й підписуємо за вас.</p>
+      <p class="lead">Пакуємо у фірмову коробку й підписуємо листівку за вас.</p>
       <ul class="perks">
-        <li><strong>Подарункове пакування з листівкою</strong>Напишіть побажання під час оформлення — впишемо його в листівку.</li>
+        <li><strong>Коробка й листівка</strong>Напишіть побажання під час оформлення — впишемо його в листівку.</li>
         <li><strong>Виготовлення за <span data-days>3–5</span> робочих днів</strong>До Нового року й Різдва замовляйте заздалегідь.</li>
         <li><strong>Доставка Новою Поштою</strong>По всій Україні, за тарифами перевізника.</li>
         <li><strong>Оплата при отриманні або на карту</strong>Як вам зручніше.</li>
       </ul>
-      <a class="btn btn--primary" href="#constructor">Створити подарунок</a>
+      <a class="btn btn--primary btn--lg" href="#constructor">Створити подарунок</a>
     </div>
   </div>
 </section>
 
-<section class="section" id="faq" aria-labelledby="faq-h">
+<section class="section section--alt" id="faq" aria-labelledby="faq-h">
   <div class="wrap wrap--narrow">
-    <div class="section__head"><h2 id="faq-h">Часті питання</h2></div>
+    <div class="section__head"><h2 id="faq-h">Маєте питання? Ми вже відповіли</h2></div>
     <div class="faq">
       <details id="faq-size"><summary>Не знаю розміру — як вгадати, щоб був сюрприз?</summary>
         <p>Виміряйте річ, яку людина часто носить, і порівняйте з таблицею. Оверсайз сидить вільніше, тож беріть звичний розмір. Якщо сумніваєтесь, напишіть нам зріст і статуру — підкажемо. Кепки регулюються ззаду, шопер — без розміру.</p>
         <div class="table-wrap"><table class="sizes">
-          <caption>Ширина виробу під пахвами, см [уточнити за Loomiq]</caption>
+          <caption>Ширина виробу під пахвами, см [уточнити]</caption>
           <thead><tr><th scope="col">Розмір</th><th scope="col">XS</th><th scope="col">S</th><th scope="col">M</th><th scope="col">L</th><th scope="col">XL</th><th scope="col">XXL</th></tr></thead>
           <tbody>
             <tr><th scope="row">Футболка базова</th><td>48</td><td>51</td><td>54</td><td>57</td><td>60</td><td>63</td></tr>
@@ -283,22 +343,23 @@
           </tbody>
         </table></div>
       </details>
+      <details><summary>Яка різниця між вишивкою і принтом — що обрати?</summary><p>Вишивка довговічніша й виглядає преміально, найкраще тримається на щільних тканинах — худі, світшотах, кепках. Принт точніше передає дрібні деталі й градієнти, дешевший і швидший. Не впевнені — підкажемо під ваш дизайн і тканину.</p></details>
+      <details><summary>Можна свій дизайн або фото?</summary><p>Так, не лише готові ідеї: надішліть напис, ескіз чи зображення в коментарі до замовлення або в Telegram — покажемо макет до оплати.</p></details>
       <details><summary>Встигнете до свята?</summary><p>Виготовлення — <span data-days>3–5</span> робочих днів після погодження макета, доставка Новою Поштою — зазвичай 1–3 дні. До Нового року й Різдва радимо замовляти щонайменше за два тижні.</p></details>
+      <details><summary>Що, якщо виріб прийде не таким?</summary><p>Перед виготовленням ви погоджуєте макет — і готовий виріб має відповідати саме йому: розташування й розмір напису, кольори, модель. Якщо щось відрізняється або є брак — переробимо за наш рахунок чи повернемо гроші. Напишіть протягом 14 днів і додайте фото.</p></details>
+      <details><summary>Чи можна обміняти персоналізований виріб?</summary><p>Кожен виріб шиємо під конкретне замовлення, тому обміну через «не підійшов розмір чи колір» немає. Якщо ми помилились із розміром чи макетом — переробимо.</p></details>
+      <details><summary>Як оплатити й отримати?</summary><p>Накладеним платежем при отриманні або передоплатою на карту — реквізити надішле менеджер. Доставка Новою Поштою по всій Україні.</p></details>
       <details><summary>Як прати, щоб напис не зіпсувався?</summary><p>До 40 °C, навиворіт, без відбілювача, не прасувати по нанесенню.</p></details>
-      <details><summary>Як оплатити?</summary><p>Накладеним платежем при отриманні або передоплатою на карту — реквізити надішле менеджер. Доставка — за тарифами Нової Пошти.</p></details>
-      <details><summary>Чи можна обміняти персоналізований виріб?</summary><p>Кожен виріб шиємо під конкретне замовлення, тому обміну через «не підійшов розмір чи колір» немає. Якщо виріб не відповідає макету, має брак або ми переплутали розмір — переробимо чи повернемо гроші. Напишіть нам протягом 14 днів і додайте фото.</p></details>
-      <details><summary>Можна свій дизайн або фото?</summary><p>Так. Надішліть напис, ескіз чи зображення в коментарі до замовлення або в Telegram — покажемо макет до оплати. Фото краще друкувати принтом, для вишивки підходять прості контури й короткий текст.</p></details>
     </div>
   </div>
 </section>
 
 <section class="final" aria-labelledby="final-h">
   <div class="wrap final__in">
-    <h2 id="final-h">Залишилось обрати, що вишити</h2>
-    <p>Оберіть виріб, впишіть ініціали чи дату й побачите результат одразу. Макет погодимо до оплати.</p>
-    <div class="hero__cta">
-      <a class="btn btn--primary btn--on-dark" href="#constructor">Створити свій</a>
-      <a class="btn btn--ghost-light" href="#ideas">Готові ідеї</a>
+    <h2 id="final-h">Готові зробити подарунок?</h2>
+    <p>Оберіть виріб, впишіть ініціали чи дату — і за кілька хвилин знатимете точну ціну. Макет погодимо до оплати.</p>
+    <div class="final__cta">
+      <a class="btn btn--primary btn--on-dark btn--lg" href="#constructor">Створити подарунок</a>
     </div>
   </div>
 </section>
@@ -309,7 +370,7 @@
   <div class="wrap footer__in">
     <div>
       <p class="logo logo--footer" translate="no">На подарунок</p>
-      <p>Одяг і аксесуари з вашим написом, ініціалами чи датою. Вишивка й принт від виробника Loomiq, доставка по Україні.</p>
+      <p>Одяг і аксесуари з вашим написом, ініціалами чи датою. Власне виробництво вишивки й друку, доставка по Україні.</p>
     </div>
     <ul class="footer__links">
       <li><a href="#faq-size">Таблиця розмірів</a></li>

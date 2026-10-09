@@ -264,13 +264,13 @@
     var left = 0.5 - (shot[2] + shot[4] / 2) / 100 * W, top = 0.5 - (shot[3] + shot[5] / 2) / 100 * H;
     var html = '<div class="garment__frame" style="left:' + (left * 100).toFixed(2) + '%;top:' + (top * 100).toFixed(2) + '%;width:' + (W * 100).toFixed(2) + '%;height:' + (H * 100).toFixed(2) + '%">' +
       '<img src="images/g/' + s.product + '-' + col.id + '-' + view + '.webp" alt="' + esc(alt) + '" width="' + shot[0] + '" height="' + shot[1] + '"' + (opts.lazy ? ' loading="lazy"' : '') + ' decoding="async">';
-    if (showDesign) {
+    if (showDesign && !opts.noDesign) {
       html += '<div class="garment__design garment__design--' + s.tech + '" style="left:' + (shot[2] + pl.fx * shot[4]).toFixed(2) + '%;top:' + (shot[3] + pl.fy * shot[5]).toFixed(2) + '%;width:' + (pl.fw * shot[4]).toFixed(2) + '%;' +
         (pl.rot ? 'transform:translate(-50%,-50%) rotate(' + pl.rot + 'deg)' : '') + '">' + designSVG(s) + '</div>';
     }
     html += '</div>';
     // Вставка з дизайном крупним планом — для малих місць нанесення, де на мініатюрі його не видно.
-    if (opts.closeup && showDesign && !BIG[s.place] && s.place !== 'tote' && s.place !== 'capfront' && pl.fw * shot[4] / 100 * W < 0.25) {
+    if (opts.closeup && showDesign && !opts.noDesign && !BIG[s.place] && s.place !== 'tote' && s.place !== 'capfront' && pl.fw * shot[4] / 100 * W < 0.25) {
       html += '<div class="garment__closeup" style="background:' + col.hex + '" aria-hidden="true">' + designSVG(s) + '</div>';
     }
     el.innerHTML = html;
@@ -525,6 +525,50 @@
         $('#ideas-h').focus({ preventScroll: true });
       });
     });
+  }
+
+  /* ---------- Каталог ---------- */
+  var CATALOG_COLOR = { teeover: 'black', tee: 'white', hoodieover: 'brown', hoodieoverfleece: 'pink', hoodie: 'bordo', hoodiezip: 'navy', sweat: 'graphite', cap: 'black', tote: 'beige' };
+  function renderCatalog() {
+    var grid = $('#catalog-grid');
+    if (!grid) return;
+    grid.innerHTML = PRODUCT_ORDER.map(function (p) {
+      var n = G[p].colors.length;
+      return '<button type="button" class="pcard" data-product="' + p + '">' +
+        '<span class="garment garment--card" data-pcard="' + p + '"></span>' +
+        '<span class="pcard__body"><span class="pcard__name">' + esc(productName(p)) + '</span>' +
+        '<span class="pcard__meta">' + n + ' ' + (n % 10 === 1 && n % 100 !== 11 ? 'колір' : (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20)) ? 'кольори' : 'кольорів') + '</span>' +
+        '<span class="pcard__price">від ' + money(CONFIG.base + PRODUCTS[p].surcharge) + '</span></span></button>';
+    }).join('');
+    PRODUCT_ORDER.forEach(function (p) {
+      renderGarment(grid.querySelector('[data-pcard="' + p + '"]'), assign({}, DEFAULT, { product: p, color: CATALOG_COLOR[p], place: firstPlace(p) }), { lazy: true, noDesign: true });
+    });
+    grid.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-product]');
+      if (!b) return;
+      var p = b.getAttribute('data-product');
+      setState({ product: p, color: CATALOG_COLOR[p], place: firstPlace(p), thread: autoThread(p, CATALOG_COLOR[p], state.thread) }, true);
+    });
+  }
+
+  /* ---------- Картки приводів: гортання ---------- */
+  function bindOcards() {
+    var box = $('#ocards'), dots = $('#ocards-dots');
+    if (!box) return;
+    var cards = $$('.ocard', box);
+    if (dots) dots.innerHTML = cards.map(function () { return '<span></span>'; }).join('');
+    function step() { return cards[1] ? cards[1].offsetLeft - cards[0].offsetLeft : box.clientWidth; }
+    function sync() {
+      var i = Math.round(box.scrollLeft / step());
+      $$('span', dots).forEach(function (d, k) { d.classList.toggle('is-on', k === i); });
+    }
+    $$('[data-ocards]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        box.scrollBy({ left: step() * Number(b.getAttribute('data-ocards')), behavior: reduceMotion() ? 'auto' : 'smooth' });
+      });
+    });
+    box.addEventListener('scroll', function () { window.requestAnimationFrame(sync); }, { passive: true });
+    sync();
   }
 
   /* ---------- Банер: приклади змінюються ---------- */
@@ -785,6 +829,8 @@
     $$('[data-tg]').forEach(function (el) { el.href = 'https://t.me/' + CONFIG.telegram; });
     $$('[data-base-price]').forEach(function (el) { el.textContent = money(CONFIG.base); });
     heroLoop();
+    renderCatalog();
+    bindOcards();
     bindIdeas();
     renderIdeas();
     bindBuilder();
